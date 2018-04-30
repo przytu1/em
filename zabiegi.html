@@ -341,8 +341,8 @@ $.getJSON('dates.json').done(function(json) {
         }
 
         if (cellOptions.active) {
-          chosen_date = date;
-          $("#step3_date").html(chosen_date.toLocaleString("pl-PL"))
+          chosen_date = date.toLocaleString("pl-PL");
+          $("#step3_date").html(chosen_date)
           switch_view("#step2", "#step3")
         }
       }
