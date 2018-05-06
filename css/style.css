@@ -101,6 +101,9 @@ Responsive media queries
 .banner-text h2 span{
     font-family: 'Satisfy', cursive;
 }
+.banner-text p {
+    margin-bottom: 50px;
+}
 .overlay-detail{
 	margin: 0 auto;
 }
@@ -327,9 +330,61 @@ footer {
 }
 .navbar-brand{
 	margin-top: 9px;
+    width: 100%;
 }
 .grid-item { width: 200px; }
 .grid-item--width2 { width: 400px; }
+
+
+.available-date {
+    background: #15d6c6;
+    color: #fff;
+}
+
+.chosen-date {
+    background: #e03997;
+    color: #fff;
+}
+
+#logo {
+    border: 1px dashed #009c95; 
+    padding: 2px; 
+    background: #fff;
+    width: 120px;
+}
+
+#contact .content {
+    font-size: 1.5em; 
+    font-weight: 100
+}
+
+#portfolio .col-md-4  {
+    margin-bottom: 10px;
+}
+
+#step2, #step3, #step_success, #step_failure {
+    display: none; 
+    text-align: right
+}
+
+#calendar-div, #info-div, #confirmation-div {
+    width: 400px; 
+    float: right;
+    margin-bottom: 20px;
+}
+
+#back-div {
+    width: 400px; 
+    float: right
+}
+
+#success-div, #failure-div {
+    width: 400px; 
+    float: right; 
+    text-align: center; 
+    font-size: 1.5em; 
+    font-weight: 100
+}
 
 /***********************************
 ************************************
@@ -371,12 +426,34 @@ Responsive media queries
 	}
 }
 
-.available-date {
-    background: #15d6c6;
-    color: #fff;
+@media (max-width:768px) {
+    #logo {
+        margin: auto;
+        width: 150px;
+    }
+
+    .topheader {
+        background-position: right;
+    }
+
+    .banner-text h2, .banner-text p {
+        opacity: 0.3;
+    }
+
+    #about {
+        background: #eee;
+    }
+
+    #contact .content {
+        font-size: 1em;
+    }
+
+    #step1, #step2, #step3, #step_success, #step_failure {
+        text-align: center;
+    }
+
+    #calendar-div, #info-div, #confirmation-div, #back-div, #success-div, #failure-div {
+        width: 100%;
+    }
 }
 
-.chosen-date {
-    background: #e03997;
-    color: #fff;
-}
