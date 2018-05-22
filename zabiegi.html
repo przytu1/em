@@ -78,7 +78,7 @@
     switch_view('#step3','#step2')
   }
 
-  var reservation = function(phone_number) {
+  var reservation = function(phone_number, customer_name) {
     if (phone_number.length < 5 || Boolean(phone_number.match(/[A-z]/g))) {
       $("#phone").css("border", "1px solid #f00")
       alert("Wpisano niepoprawny numer telefonu")
@@ -88,7 +88,8 @@
     var template_params = {
       chosen_service: chosen_service,
       chosen_date: chosen_date,
-      phone_number: phone_number
+      phone_number: phone_number,
+      customer_name: customer_name
     };
 
     $("#reservation_button").addClass("loading disabled")
@@ -222,14 +223,23 @@
              <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
              <b>Wybrany termin:</b><br /> <span id="step3_date"></span> <br /><br />
              
-             <b>Podaj swój numer telefonu:</b> <br /><br />
+              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 47%; text-align: left">
+                  <i class="phone icon"></i>
+                  Twój numer telefonu:
+                </div>
+                <input type="text" id="phone" autofocus>
+              </div>
 
-             <div class="ui left icon big input" style="width: 100%; margin-bottom: 10px;">
-               <input type="text" id="phone">
-               <i class="phone icon"></i>
-             </div>
+              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 47%; text-align: left">
+                  <i class="user icon"></i>
+                  Twoje imię:
+                </div>
+                <input type="text" id="name">
+              </div>
 
-             <button id="reservation_button" class="ui big labeled teal icon button" style="width: 100%" onclick="reservation($('#phone').val())">
+             <button id="reservation_button" class="ui big labeled teal icon button" style="width: 100%" onclick="reservation($('#phone').val(), $('#name').val())">
               <i class="calendar check outline icon"></i>
               Zarezerwuj wizytę
              </button>
