@@ -326,7 +326,10 @@ const months_fullnames = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec
 
 var is_day_available = function(dates, year, month, day) {
   const month_name = months_fullnames[month];
-  return dates[year] !== undefined &&
+  const today = new Date();
+  const checked_day = new Date(year, month, day)
+  return checked_day > today &&
+         dates[year] !== undefined &&
          dates[year][month_name] !== undefined &&
          dates[year][month_name][day] !== undefined
 }
