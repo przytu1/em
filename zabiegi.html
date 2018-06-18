@@ -64,7 +64,7 @@
     chosen_service = service;
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
-    switch_view("#step1", "#step2")
+    switch_view("#step1", "#step3")
   }
 
   var switch_view = function(fromStep, toStep) {
@@ -78,7 +78,7 @@
     switch_view('#step3','#step2')
   }
 
-  var reservation = function(phone_number, customer_name) {
+  var reservation = function(phone_number, customer_name, chosen_date) {
     if (phone_number.length < 5 || Boolean(phone_number.match(/[A-z]/g))) {
       $("#phone").css("border", "1px solid #f00")
       alert("Wpisano niepoprawny numer telefonu")
@@ -119,7 +119,7 @@
 
           <div id="step1" style="display: block">
             <h2 class="title-text">
-              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 1/3</a>
+              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 1/2</a>
               Jaki zabieg rzęs Ciebie interesuje? 
             </h2>
             <br />
@@ -214,14 +214,14 @@
 
           <div id="step3">
             <h2 class="title-text">
-              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 3/3</a>
-              Potwierdź wizytę
+              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/2</a>
+              Podaj informacje
             </h2>
             <br />
 
             <div id="confirmation-div">
              <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
-             <b>Wybrany termin:</b><br /> <span id="step3_date"></span> <br /><br />
+             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję wizyty od poniedziałku do soboty od godz. 9:00. Najpóźniejsza możliwa godzina wizyty to godz. 18:00. Po odebraniu Twojej rezerwacji skontaktuję się z Tobą.</span> <br /><br />
              
               <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label" style="width: 47%; text-align: left">
@@ -239,7 +239,15 @@
                 <input type="text" id="name">
               </div>
 
-             <button id="reservation_button" class="ui big labeled teal icon button" style="width: 100%" onclick="reservation($('#phone').val(), $('#name').val())">
+              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 47%; text-align: left">
+                  <i class="calendar icon"></i>
+                  Jaki termin Ciebie interesuje:
+                </div>
+                <input type="text" id="termin">
+              </div>
+
+             <button id="reservation_button" class="ui big labeled teal icon button" style="width: 53%" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
               <i class="calendar check outline icon"></i>
               Zarezerwuj wizytę
              </button>

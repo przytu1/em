@@ -367,10 +367,17 @@ footer {
     text-align: right
 }
 
-#calendar-div, #info-div, #confirmation-div {
+#calendar-div, #info-div {
     width: 400px; 
     float: right;
     margin-bottom: 20px;
+}
+
+#confirmation-div {
+    float: right;
+    margin-bottom: 20px;
+    width: 50%;
+    min-width: 550px;
 }
 
 #back-div {
