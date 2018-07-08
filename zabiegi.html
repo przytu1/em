@@ -31,17 +31,17 @@
     gtag('config', 'UA-118788983-1');
   </script>
 
-  <!-- Hotjar Tracking Code for efektmotyla.waw.pl -->
-  <script>
-      (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:871239,hjsv:6};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  <!-- Begin Inspectlet Asynchronous Code -->
+  <script type="text/javascript">
+  (function() {
+  window.__insp = window.__insp || [];
+  __insp.push(['wid', 1516505172]);
+  var ldinsp = function(){
+  if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1516505172&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+  setTimeout(ldinsp, 0);
+  })();
   </script>
+  <!-- End Inspectlet Asynchronous Code -->
 
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.1.0/email.min.js"></script>
   <script type="text/javascript">(function(){ emailjs.init("user_TuybsFctQQeHmUSgacGvH"); })();</script>
@@ -50,13 +50,17 @@
   var chosen_service = null;
   var chosen_date = null;
 
+  const note = ' <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.'
+
   var service_descriptions = {
-    'przedluzanie 1-1': 'Przedłużanie rzęs 1-1. Zabieg trwa około 3h.',
-    'uzupelnianie 1-1': 'Uzupelnianie rzęs 1-1 (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h. <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.',
-    'przedluzanie 2-3d': 'Przedłużanie rzęs 2-3D. Zabieg trwa około 3.5h.',
-    'uzupelnianie 2-3d': 'Uzupelnianie rzęs 2-3D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 3h. <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.',
-    'przedluzanie 4-5d': 'Przedłużanie rzęs 4-5D. Zabieg trwa około 3.5h.',
-    'uzupelnianie 4-5d': 'Uzupelnianie rzęs 4-5D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 3h. <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.',
+    'przedluzanie 2-3d': 'Przedłużanie rzęs 2-3D. Zabieg trwa około 3h.',
+    'uzupelnianie 2-3d': 'Uzupelnianie rzęs 2-3D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 4d': 'Przedłużanie rzęs 4D. Zabieg trwa około 3h.',
+    'uzupelnianie 4d': 'Uzupelnianie rzęs 4D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 5d': 'Przedłużanie rzęs 5D. Zabieg trwa około 3h.',
+    'uzupelnianie 5d': 'Uzupelnianie rzęs 5D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 6d': 'Przedłużanie rzęs 6D. Zabieg trwa około 3h.',
+    'uzupelnianie 6d': 'Uzupelnianie rzęs 6D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
     'usuniecie rzes': 'Zdejmowanie rzęs. Zabieg trwa około 30 minut.'
   }
 
@@ -123,30 +127,12 @@
               Jaki zabieg rzęs Ciebie interesuje? 
             </h2>
             <br />
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 1-1')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 1:1
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%;">
-                <span style="color: #e03997; font-weight: 100">100 zł (3h)</span>
-              </a>
-            </div>
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 1-1')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 1:1
-              </div>
-              <a class="ui basic teal left pointing label"  style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">80 zł (2.5h)</span>
-              </a>
-            </div><br />
-
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 2-3d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="heart icon"></i> Przedłużanie 2-3D
               </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">120 zł (3.5h)</span>
+              <a class="ui basic teal left pointing label" style="width: 32%;">
+                <span style="color: #e03997; font-weight: 100">120 zł</span>
               </a>
             </div>
 
@@ -154,26 +140,62 @@
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="heart icon"></i> Uzupełnianie 2-3D
               </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">100 zł (3h)</span>
+              <a class="ui basic teal left pointing label"  style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">100 zł</span>
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 4-5d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 4-5D
+                <i class="heart icon"></i> Przedłużanie 4D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">150 zł (3.5h)</span>
+                <span style="color: #e03997; font-weight: 100">140 zł</span>
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 4-5d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 4-5D
+                <i class="heart icon"></i> Uzupełnianie 4D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">120 zł (3.5h)</span>
+                <span style="color: #e03997; font-weight: 100">110 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 5d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 5D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">150 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 5d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 5D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">120 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 6d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 6D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">160 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 6d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 6D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">130 zł</span>
               </a>
             </div><br />
 
@@ -182,7 +204,7 @@
                 <i class="heart icon"></i> Zdejmowanie rzęs
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">30 zł (0.5h)</span>
+                <span style="color: #e03997; font-weight: 100">30 zł</span>
               </a>
             </div><br />
 
@@ -221,7 +243,7 @@
 
             <div id="confirmation-div">
              <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
-             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję wizyty od poniedziałku do soboty od godz. 9:00. Najpóźniejsza możliwa godzina wizyty to godz. 18:00. Po odebraniu Twojej rezerwacji skontaktuję się z Tobą.</span> <br /><br />
+             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję wizyty od poniedziałku do soboty od godz. 9:00. Najpóźniejsza możliwa godzina wizyty to godz. 17:00. Po odebraniu Twojej rezerwacji skontaktuję się z Tobą.</span> <br /><br />
              
               <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label" style="width: 47%; text-align: left">
@@ -253,7 +275,7 @@
              </button>
             </div>
             <div id="back-div">
-             <button class="ui small labeled icon button" onclick="back_to_calendar()">
+             <button class="ui small labeled icon button" onclick="switch_view('#step3','#step1')">
               <i class="left arrow icon"></i>
               Cofnij
              </button>
