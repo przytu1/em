@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>★ Rezerwacja terminu wizyty. Przedłużanie rzęs Warszawa Praga Południe 👍</title>
+  <meta name="description" content="Rezerwuj wizytę online. Sprawdź wolne terminy. Metoda 1:1 100zł, 2-3D 120zł, 4-5D 150zł">
+  <meta name="keywords" content="przedłużanie rzęs stylizacja zagęszczanie kocie oko kępki rzęsy oczy uroda">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" class="ui" href="https://semantic-ui.com/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" class="ui" href="css/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/calendar.min.css" />
+
+  <script src="js/jquery-2.1.4.js"></script>
+  <script src="js/semantic.min.js"></script>
+  <script src="js/calendar.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118788983-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-118788983-1');
+  </script>
+ 
+  <!--  MouseStats:Begin  -->
+  <script type="text/javascript">var MouseStats_Commands=MouseStats_Commands?MouseStats_Commands:[]; (function(){function b(){if(void 0==document.getElementById("__mstrkscpt")){var a=document.createElement("script");a.type="text/javascript";a.id="__mstrkscpt";a.src=("https:"==document.location.protocol?"https://ssl":"http://www2")+".mousestats.com/js/5/2/5258489359553057273.js?"+Math.floor((new Date).getTime()/6E5);a.async=!0;a.defer=!0;(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}}window.attachEvent?window.attachEvent("onload",b):window.addEventListener("load", b,!1);"complete"===document.readyState&&b()})(); </script>
+  <!--  MouseStats:End  -->
+
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.1.0/email.min.js"></script>
+  <script type="text/javascript">(function(){ emailjs.init("user_TuybsFctQQeHmUSgacGvH"); })();</script>
+
+  <script>
+  var chosen_service = null;
+  var chosen_date = null;
+
+  const note = ' <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.'
+
+  var service_descriptions = {
+    'przedluzanie 2-3d': 'Przedłużanie rzęs 2-3D. Zabieg trwa około 3h.',
+    'uzupelnianie 2-3d': 'Uzupelnianie rzęs 2-3D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 4d': 'Przedłużanie rzęs 4D. Zabieg trwa około 3h.',
+    'uzupelnianie 4d': 'Uzupelnianie rzęs 4D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 5d': 'Przedłużanie rzęs 5D. Zabieg trwa około 3h.',
+    'uzupelnianie 5d': 'Uzupelnianie rzęs 5D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 6d': 'Przedłużanie rzęs 6D. Zabieg trwa około 3h.',
+    'uzupelnianie 6d': 'Uzupelnianie rzęs 6D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'usuniecie rzes': 'Zdejmowanie rzęs. Zabieg trwa około 30 minut.'
+  }
+
+  var choose_service = function(service) {
+    chosen_service = service;
+    $("#step2_desc").html(service_descriptions[service])
+    $("#step3_desc").html(service_descriptions[service])
+    switch_view("#step1", "#step3")
+  }
+
+  var switch_view = function(fromStep, toStep) {
+    $(fromStep).fadeOut("slow", function() {
+      $(toStep).fadeIn("slow")
+    })
+  }
+
+  var back_to_calendar = function() {
+    $('#example14').calendar('clear')
+    switch_view('#step3','#step2')
+  }
+
+  var reservation = function(phone_number, customer_name, chosen_date) {
+    if (phone_number.length < 5 || Boolean(phone_number.match(/[A-z]/g))) {
+      $("#phone").css("border", "1px solid #f00")
+      alert("Wpisano niepoprawny numer telefonu")
+      return
+    }
+
+    var template_params = {
+      chosen_service: chosen_service,
+      chosen_date: chosen_date,
+      phone_number: phone_number,
+      customer_name: customer_name
+    };
+
+    $("#reservation_button").addClass("loading disabled")
+
+    emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
+         console.log('SUCCESS!', response.status, response.text);
+        switch_view("#step3", "#step_success")
+      }, function(error) {
+         console.log('FAILED...', error);
+          switch_view("#step3", "#step_failure")
+      });
+  }
+  </script>
+
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+  <section style="text-align: center; padding: 20px">
+    <img src="img/logo.png" width="170" />
+  </section>
+
+  <section id="about" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-right" style="margin-top: 30px">
+
+          <div id="step1" style="display: block">
+            <h2 class="title-text">
+              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 1/2</a>
+              Jaki zabieg rzęs Ciebie interesuje? 
+            </h2>
+            <br />
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 2-3d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 2-3D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%;">
+                <span style="color: #e03997; font-weight: 100">120 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 2-3d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 2-3D
+              </div>
+              <a class="ui basic teal left pointing label"  style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">100 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 4d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 4D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">140 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 4d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 4D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">110 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 5d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 5D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">150 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 5d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 5D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">120 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 6d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 6D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">160 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 6d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 6D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">130 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('usuniecie rzes')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Zdejmowanie rzęs
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">30 zł</span>
+              </a>
+            </div><br />
+
+          </div> 
+
+
+          <div id="step2">
+            <h2 class="title-text">
+              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/3</a>
+              Wybierz termin zabiegu
+            </h2>
+            <br />
+
+            <div id="calendar-div">
+             <div class="ui calendar" id="example14"></div>
+            </div>
+            <div id="info-div">
+             <button class="ui small labeled icon button" onclick="switch_view('#step2','#step1')">
+              <i class="left arrow icon"></i>
+              Cofnij
+             </button>
+             <br />
+             <div style="padding: 10px; margin-top:30px; text-align: center">
+             <b>Wybrany zabieg:</b><br /> <span id="step2_desc"></span>
+             </div>
+            </div>
+          </div>
+
+
+          <div id="step3">
+            <h2 class="title-text">
+              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/2</a>
+              Podaj informacje
+            </h2>
+            <br />
+
+            <div id="confirmation-div">
+             <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
+             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję wizyty od poniedziałku do soboty od godz. 9:00. Najpóźniejsza możliwa godzina wizyty to godz. 17:00. Po odebraniu Twojej rezerwacji skontaktuję się z Tobą.</span> <br /><br />
+             
+              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 47%; text-align: left">
+                  <i class="phone icon"></i>
+                  Twój numer telefonu:
+                </div>
+                <input type="text" id="phone" autofocus>
+              </div>
+
+              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 47%; text-align: left">
+                  <i class="user icon"></i>
+                  Twoje imię:
+                </div>
+                <input type="text" id="name">
+              </div>
+
+              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 47%; text-align: left">
+                  <i class="calendar icon"></i>
+                  Jaki termin Ciebie interesuje:
+                </div>
+                <input type="text" id="termin">
+              </div>
+
+             <button id="reservation_button" class="ui big labeled teal icon button" style="width: 53%" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
+              <i class="calendar check outline icon"></i>
+              Zarezerwuj wizytę
+             </button>
+            </div>
+            <div id="back-div">
+             <button class="ui small labeled icon button" onclick="switch_view('#step3','#step1')">
+              <i class="left arrow icon"></i>
+              Cofnij
+             </button>
+            </div>
+          </div>
+
+
+          <div id="step_success">
+            <h2 class="title-text">
+              Dziękuję!
+            </h2>
+            <br />
+
+            <div id="success-div">
+              Prośba o rezerwację wizyty została do mnie wysłana.
+              <span style="color: #e61a8d">Dzisiaj</span> skontaktuję się z Tobą z potwierdzeniem umówienia wizyty!
+              <br /><br /><br />
+              <span style="font-size: 2em">
+                <i class="phone volume icon"></i>
+                <i class="mobile alternate icon"></i>
+                <i class="comment outline icon"></i>
+              </span>
+            </div>
+          </div>
+
+          <div id="step_failure">
+            <h2 class="title-text">
+              Wystąpił błąd <i class="frown outline icon"></i>
+            </h2>
+            <br />
+
+            <div id="failure-div">
+              Niestety wystąpił nieoczekiwany błąd podczas wysyłania wiadomości.<br /><br />
+              Proszę o kontakt poprzez sms:<br /><span style="color: #e61a8d">+48 881 378 603</span><br /><br />
+              lub wiadomość email:<br /><span style="color: #e61a8d">joanna.efektmotyla@gmail.com</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" style="margin-top: 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="color: #fff; text-align: center; padding: 50px">
+
+          <div class="ui horizontal list" style="margin-top: 20px">
+            <div class="item">
+              <i class="phone icon"></i>
+              <div class="content">
+                <a href="tel:+48881378603" style="color: #fff">+48 881 378 603</a>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                ul. Zamieniecka 54, Warszawa, Praga Południe
+              </div>
+            </div>
+          </div>
+
+          <div class="ui small images" style="margin-top: 30px">
+            <img src="img/portfolio04.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio06.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio08.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio07.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio05.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+const months_fullnames = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+
+var is_day_available = function(dates, year, month, day) {
+  const month_name = months_fullnames[month];
+  const today = new Date();
+  const checked_day = new Date(year, month, day)
+  return checked_day > today &&
+         dates[year] !== undefined &&
+         dates[year][month_name] !== undefined &&
+         dates[year][month_name][day] !== undefined
+}
+
+var is_hour_available = function(dates, year, month, day, hour) {
+  const month_name = months_fullnames[month];
+  return dates[year] !== undefined &&
+         dates[year][month_name] !== undefined &&
+         dates[year][month_name][day] !== undefined &&
+         dates[year][month_name][day].includes(hour)
+}
+
+$.getJSON('dates.json').done(function(json) {
+
+  const dates = json.available_dates;
+
+  $('#example14').calendar({
+    inline: true,
+    disableMinute: true,
+    disableYear: true,
+    disableMonth: true,
+    firstDayOfWeek: 1,
+    ampm: false,
+    text: {
+        days: ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
+        months: months_fullnames,
+        monthsShort: ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'],
+        today: 'Dzisiaj',
+        now: 'Teraz',
+        am: 'AM',
+        pm: 'PM'
+      },
+    formatter: {
+      cell: function (cell, date, cellOptions) {
+        
+        var is_available = is_day_available(dates, date.getFullYear(), date.getMonth(), date.getDate()) &&
+                           (cellOptions.mode != "hour" || is_hour_available(dates, date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()))
+
+        if (is_available) {
+          cell.toggleClass('disabled', false)
+          cell.toggleClass('available-date', true)
+        } else {
+          cell.toggleClass('disabled', true)
+          cell.toggleClass('available-date', false)
+        }
+
+        if (cellOptions.active) {
+          chosen_date = date.toLocaleString("pl-PL");
+          $("#step3_date").html(chosen_date)
+          switch_view("#step2", "#step3")
+        }
+      }
+    },
+    className: {
+        activeCell: 'chosen-date'
+    }
+  });
+
+}).fail(function( jqxhr, textStatus, error ) {
+  console.log("Request Failed: " + textStatus + ", " + error);
+});
+
+</script>
+
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>
