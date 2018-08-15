@@ -47,10 +47,8 @@
   var service_descriptions = {
     'przedluzanie 2-3d': 'Przedłużanie rzęs 2-3D. Zabieg trwa około 3h.',
     'uzupelnianie 2-3d': 'Uzupelnianie rzęs 2-3D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
-    'przedluzanie 4d': 'Przedłużanie rzęs 4D. Zabieg trwa około 3h.',
-    'uzupelnianie 4d': 'Uzupelnianie rzęs 4D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
-    'przedluzanie 5d': 'Przedłużanie rzęs 5D. Zabieg trwa około 3h.',
-    'uzupelnianie 5d': 'Uzupelnianie rzęs 5D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 4-5d': 'Przedłużanie rzęs 4D. Zabieg trwa około 3h.',
+    'uzupelnianie 4-5d': 'Uzupelnianie rzęs 4D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
     'przedluzanie 6d': 'Przedłużanie rzęs 6D. Zabieg trwa około 3h.',
     'uzupelnianie 6d': 'Uzupelnianie rzęs 6D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
     'usuniecie rzes': 'Zdejmowanie rzęs. Zabieg trwa około 30 minut.'
@@ -105,7 +103,7 @@
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
   <section style="text-align: center; padding: 20px">
-    <img src="img/logo.png" width="170" />
+    <img src="img/lashdream-logo.png" width="170" />
   </section>
 
   <section id="about" class="section-padding wow fadeIn delay-05s">
@@ -124,7 +122,7 @@
                 <i class="heart icon"></i> Przedłużanie 2-3D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%;">
-                <span style="color: #e03997; font-weight: 100">120 zł</span>
+                <span style="color: #e03997; font-weight: 100">130 zł</span>
               </a>
             </div>
 
@@ -133,43 +131,25 @@
                 <i class="heart icon"></i> Uzupełnianie 2-3D
               </div>
               <a class="ui basic teal left pointing label"  style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">100 zł</span>
-              </a>
-            </div><br />
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 4d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 4D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">140 zł</span>
-              </a>
-            </div>
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 4d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 4D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">110 zł</span>
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 5d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 4-5d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 5D
+                <i class="heart icon"></i> Przedłużanie 4-5D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">150 zł</span>
+                <span style="color: #e03997; font-weight: 100">160 zł</span>
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 5d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 4-5d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 5D
+                <i class="heart icon"></i> Uzupełnianie 4-5D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">120 zł</span>
+                <span style="color: #e03997; font-weight: 100">130 zł</span>
               </a>
             </div><br />
 
@@ -178,7 +158,7 @@
                 <i class="heart icon"></i> Przedłużanie 6D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">160 zł</span>
+                <span style="color: #e03997; font-weight: 100">190 zł</span>
               </a>
             </div>
 
@@ -187,7 +167,7 @@
                 <i class="heart icon"></i> Uzupełnianie 6D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">130 zł</span>
+                <span style="color: #e03997; font-weight: 100">150 zł</span>
               </a>
             </div><br />
 
@@ -302,7 +282,7 @@
             <div id="failure-div">
               Niestety wystąpił nieoczekiwany błąd podczas wysyłania wiadomości.<br /><br />
               Proszę o kontakt poprzez sms:<br /><span style="color: #e61a8d">+48 881 378 603</span><br /><br />
-              lub wiadomość email:<br /><span style="color: #e61a8d">joanna.efektmotyla@gmail.com</span>
+              lub wiadomość email:<br /><span style="color: #e61a8d">joanna.lashdream@gmail.com</span>
             </div>
           </div>
 
@@ -316,12 +296,12 @@
         <div class="col-md-12" style="color: #fff; text-align: center; padding: 50px">
 
           <div class="ui horizontal list" style="margin-top: 20px">
-            <div class="item">
+            <!-- <div class="item">
               <i class="phone icon"></i>
               <div class="content">
-                <a href="tel:+48881378603" style="color: #fff">+48 881 378 603</a>
+                <a href="tel:+48881378603" style="color: #fff">+48 </a>
               </div>
-            </div>
+            </div> -->
             <div class="item">
               <i class="marker icon"></i>
               <div class="content">
@@ -334,7 +314,7 @@
             <img src="img/portfolio04.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
             <img src="img/portfolio06.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
             <img src="img/portfolio08.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
-            <img src="img/portfolio07.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio20.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
             <img src="img/portfolio05.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
           </div>
 

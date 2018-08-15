@@ -350,7 +350,7 @@ footer {
     border: 1px dashed #009c95; 
     padding: 2px; 
     background: #fff;
-    width: 120px;
+    width: 150px;
 }
 
 #contact .content {
@@ -376,7 +376,7 @@ footer {
 #confirmation-div {
     float: right;
     margin-bottom: 20px;
-    width: 50%;
+    width: 55%;
     min-width: 550px;
 }
 

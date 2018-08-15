@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://efektmotyla.waw.pl/sitemap.xml
+Sitemap: http://lashdream.pl/sitemap.xml
