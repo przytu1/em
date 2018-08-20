@@ -215,10 +215,10 @@
 
             <div id="confirmation-div">
              <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
-             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję wizyty od poniedziałku do soboty od godz. 9:00. Najpóźniejsza możliwa godzina wizyty to godz. 17:00. Po odebraniu Twojej rezerwacji skontaktuję się z Tobą.</span> <br /><br />
+             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję od poniedziałku do soboty. Po odebraniu Twojej rezerwacji otrzymasz ode mnie potwierdzenie umówienia wizyty.</span> <br /><br />
              
               <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label" style="width: 47%; text-align: left">
+                <div class="ui label reservation-input">
                   <i class="phone icon"></i>
                   Twój numer telefonu:
                 </div>
@@ -226,7 +226,7 @@
               </div>
 
               <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label" style="width: 47%; text-align: left">
+                <div class="ui label reservation-input">
                   <i class="user icon"></i>
                   Twoje imię:
                 </div>
@@ -234,14 +234,14 @@
               </div>
 
               <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label" style="width: 47%; text-align: left">
+                <div class="ui label reservation-input">
                   <i class="calendar icon"></i>
                   Jaki termin Ciebie interesuje:
                 </div>
                 <input type="text" id="termin">
               </div>
 
-             <button id="reservation_button" class="ui big labeled teal icon button" style="width: 53%" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
+             <button id="reservation_button" class="ui big labeled teal icon button" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
               <i class="calendar check outline icon"></i>
               Zarezerwuj wizytę
              </button>
@@ -305,7 +305,7 @@
             <div class="item">
               <i class="marker icon"></i>
               <div class="content">
-                ul. Zamieniecka 54, Warszawa, Praga Południe
+                ul. Zamieniecka 54 <br /> Warszawa, Praga Południe
               </div>
             </div>
           </div>

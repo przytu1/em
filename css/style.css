@@ -377,7 +377,6 @@ footer {
     float: right;
     margin-bottom: 20px;
     width: 55%;
-    min-width: 550px;
 }
 
 #back-div {
@@ -393,11 +392,25 @@ footer {
     font-weight: 100
 }
 
+#reservation_button {
+    width: 53%;
+}
+
+.reservation-input {
+    width: 47%; 
+    text-align: left
+}
+
 /***********************************
 ************************************
 Responsive media queries
 ************************************
 ***********************************/
+@media (min-width: 551px) {
+    #confirmation-div {
+        min-width: 550px;
+    }
+}
 @media (min-width: 551px) and (max-width: 980px){
 	.title-text{
 	margin-bottom: 15px;
@@ -459,8 +472,18 @@ Responsive media queries
         text-align: center;
     }
 
-    #calendar-div, #info-div, #confirmation-div, #back-div, #success-div, #failure-div {
+    #step3_desc, #step3_date {
+        font-size: 0.9em;
+    }
+
+    #calendar-div, #info-div, #confirmation-div, #back-div, #success-div, #failure-div, #reservation_button {
         width: 100%;
     }
+
+    .reservation-input {
+        width: 53%;
+        font-size: 0.9em !important;
+    }
+
 }
 
