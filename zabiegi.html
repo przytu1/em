@@ -223,30 +223,36 @@
 
             <div id="confirmation-div">
              <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
-             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję od poniedziałku do soboty. Po odebraniu Twojej rezerwacji otrzymasz ode mnie potwierdzenie umówienia wizyty.</span> <br /><br />
+             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję od poniedziałku do soboty. Po odebraniu Twojej rezerwacji <span style="color: #e61a8d">jeszcze dzisiaj</span> otrzymasz ode mnie potwierdzenie umówienia wizyty.</span> <br /><br />
              
-              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label reservation-input">
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label reservation-input" style="width: 100%;">
                   <i class="phone icon"></i>
-                  Twój numer telefonu:
+                  Proszę podać numer telefonu:
                 </div>
-                <input type="text" id="phone" autofocus>
+                <div class="ui input" style="width: 100%;">
+                  <input type="text" id="phone" autofocus>
+                </div>
               </div>
 
-              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label reservation-input">
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label reservation-input" style="width: 100%;">
                   <i class="user icon"></i>
-                  Twoje imię:
+                  Pani imię:
                 </div>
-                <input type="text" id="name">
+                <div class="ui input" style="width: 100%;">
+                  <input type="text" id="name">
+                </div>
               </div>
 
-              <div class="ui labeled input" style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label reservation-input">
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label reservation-input" style="width: 100%;">
                   <i class="calendar icon"></i>
-                  Jaki termin Ciebie interesuje:
+                  Jaki termin Panią interesuje?
                 </div>
-                <input type="text" id="termin">
+                <div class="ui input" style="width: 100%;">
+                  <input type="text" id="termin">
+                </div>
               </div>
 
              <button id="reservation_button" class="ui big labeled teal icon button" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
