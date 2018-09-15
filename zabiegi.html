@@ -71,7 +71,8 @@
 
   var switch_view = function(fromStep, toStep) {
     $(fromStep).fadeOut("slow", function() {
-      $(toStep).fadeIn("slow")
+      $(toStep).fadeIn("slow");
+      $("html, body").animate({ scrollTop: 0 }, "slow");
     })
   }
 
@@ -247,7 +248,7 @@
                   Proszę podać numer telefonu:
                 </div>
                 <div class="ui input" style="width: 100%;">
-                  <input type="text" id="phone" autofocus>
+                  <input type="text" id="phone">
                 </div>
               </div>
 
