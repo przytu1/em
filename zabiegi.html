@@ -55,8 +55,8 @@
   var service_descriptions = {
     'przedluzanie 2-3d': 'Przedłużanie rzęs 2-3D. Zabieg trwa około 3h.',
     'uzupelnianie 2-3d': 'Uzupelnianie rzęs 2-3D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
-    'przedluzanie 4-5d': 'Przedłużanie rzęs 4D. Zabieg trwa około 3h.',
-    'uzupelnianie 4-5d': 'Uzupelnianie rzęs 4D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 4-5d': 'Przedłużanie rzęs 4-5D. Zabieg trwa około 3h.',
+    'uzupelnianie 4-5d': 'Uzupelnianie rzęs 4-5D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
     'przedluzanie 6d': 'Przedłużanie rzęs 6D. Zabieg trwa około 3h.',
     'uzupelnianie 6d': 'Uzupelnianie rzęs 6D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
     'usuniecie rzes': 'Zdejmowanie rzęs. Zabieg trwa około 30 minut.'
@@ -81,10 +81,19 @@
   }
 
   var reservation = function(phone_number, customer_name, chosen_date) {
-    if (phone_number.length < 5 || Boolean(phone_number.match(/[A-z]/g))) {
-      $("#phone").css("border", "1px solid #f00")
-      alert("Wpisano niepoprawny numer telefonu")
+    if (phone_number.length < 9 || Boolean(phone_number.match(/[A-z]/g))) {
+      alert("Wpisano niepoprawny numer telefonu. Numer musi składać się z co najmniej 9 cyfr.")
       return
+    }
+
+    if (customer_name.length == 0) {
+      alert("Proszę podać imię")
+      return 
+    }
+
+    if (chosen_date.length == 0) {
+      alert("Proszę określić preferowany termin wizyty")
+      return 
     }
 
     var template_params = {
@@ -222,8 +231,15 @@
             <br />
 
             <div id="confirmation-div">
-             <b>Wybrany zabieg:</b><br /> <span id="step3_desc"></span> <br /><br />
-             <b>Terminy wizyt:</b><br /> <span id="step3_date">Przyjmuję od poniedziałku do soboty. Po odebraniu Twojej rezerwacji <span style="color: #e61a8d">jeszcze dzisiaj</span> otrzymasz ode mnie potwierdzenie umówienia wizyty.</span> <br /><br />
+              <span id="step3_txt">
+                <b>Wybrany zabieg:</b> <span id="step3_desc"></span>
+                <b>Terminy wizyt:</b> Przyjmuję od poniedziałku do soboty. Po odebraniu Twojej rezerwacji <span style="color: #e61a8d">jeszcze dzisiaj</span> otrzymasz ode mnie potwierdzenie umówienia wizyty.</span>
+              </span>
+              <br /><br />
+
+               <span id="step3_txt"><b>Przetwarzanie danych osobowych:</b> Imię i nazwisko oraz numer telefonu są przeze mnie wykorzystywane tylko i wyłącznie do kontaktu w celu potwierdzenia rezerwacji oraz zarezerwowania terminu na podane dane.</span>
+
+              <br /><br />
              
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label reservation-input" style="width: 100%;">
@@ -238,7 +254,7 @@
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label reservation-input" style="width: 100%;">
                   <i class="user icon"></i>
-                  Pani imię:
+                  Imię i nazwisko:
                 </div>
                 <div class="ui input" style="width: 100%;">
                   <input type="text" id="name">
@@ -257,7 +273,7 @@
 
              <button id="reservation_button" class="ui big labeled teal icon button" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
               <i class="calendar check outline icon"></i>
-              Zarezerwuj wizytę
+              Akceptuję i rezerwuję wizytę
              </button>
             </div>
             <div id="back-div">

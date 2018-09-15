@@ -377,6 +377,11 @@ footer {
     float: right;
     margin-bottom: 20px;
     width: 55%;
+    text-align: left;
+}
+
+#step3_txt {
+    font-size: 0.8em;
 }
 
 #back-div {
@@ -393,7 +398,7 @@ footer {
 }
 
 #reservation_button {
-    width: 53%;
+    width: 55%;
 }
 
 .reservation-input {
@@ -472,8 +477,8 @@ Responsive media queries
         text-align: center;
     }
 
-    #step3_desc, #step3_date {
-        font-size: 0.9em;
+    #step3_txt {
+        font-size: 0.7em;
     }
 
     #calendar-div, #info-div, #confirmation-div, #back-div, #success-div, #failure-div, #reservation_button {
