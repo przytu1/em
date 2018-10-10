@@ -47,6 +47,9 @@ Responsive media queries
     min-height: 500px;
     background-position: center;
 }
+.mobile-content {
+    display: none;
+}
 .navbar-default {
     background-color: transparent;
 	border: 0px;
@@ -459,6 +462,14 @@ Responsive media queries
 
     .topheader {
         background-position: right;
+    }
+
+    .desktop-content {
+        display: none;
+    }
+
+    .mobile-content {
+        display: block;
     }
 
     .banner-text h2, .banner-text p {
