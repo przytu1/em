@@ -16,11 +16,9 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" class="ui" href="https://semantic-ui.com/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" class="ui" href="css/semantic.min.css">
-  <link rel="stylesheet" type="text/css" href="css/calendar.min.css" />
 
   <script src="js/jquery-2.1.4.js"></script>
   <script src="js/semantic.min.js"></script>
-  <script src="js/calendar.js"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118788983-1"></script>
@@ -50,15 +48,25 @@
   var chosen_service = null;
   var chosen_date = null;
 
-  const note = ' <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.'
+
+  var service_desc_przedluzanie = function(name) {
+    return 'Przedłużanie rzęs ' + name + '. Zabieg trwa około 3h.'
+  }
+
+  var service_desc_uzupelnianie = function(name) {
+    const note = ' <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.'
+    return 'Uzupelnianie rzęs ' + name + ' (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note;
+  }
 
   var service_descriptions = {
-    'przedluzanie 2-3d': 'Przedłużanie rzęs 2-3D. Zabieg trwa około 3h.',
-    'uzupelnianie 2-3d': 'Uzupelnianie rzęs 2-3D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
-    'przedluzanie 4-5d': 'Przedłużanie rzęs 4-5D. Zabieg trwa około 3h.',
-    'uzupelnianie 4-5d': 'Uzupelnianie rzęs 4-5D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
-    'przedluzanie 6d': 'Przedłużanie rzęs 6D. Zabieg trwa około 3h.',
-    'uzupelnianie 6d': 'Uzupelnianie rzęs 6D (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note,
+    'przedluzanie 2d': service_desc_przedluzanie("2D"),
+    'uzupelnianie 2d': service_desc_uzupelnianie("2D"),
+    'przedluzanie 3-4d': service_desc_przedluzanie("3-4D"),
+    'uzupelnianie 3-4d': service_desc_uzupelnianie("3-4D"),
+    'przedluzanie 5-6d': service_desc_przedluzanie("5-6D"),
+    'uzupelnianie 5-6d': service_desc_uzupelnianie("5-6D"),
+    'przedluzanie 7-8d': service_desc_przedluzanie("7-8D"),
+    'uzupelnianie 7-8d': service_desc_uzupelnianie("7-8D"),
     'usuniecie rzes': 'Zdejmowanie rzęs. Zabieg trwa około 30 minut.'
   }
 
@@ -74,11 +82,6 @@
       $(toStep).fadeIn("slow");
       $("html, body").animate({ scrollTop: 0 }, "slow");
     })
-  }
-
-  var back_to_calendar = function() {
-    $('#example14').calendar('clear')
-    switch_view('#step3','#step2')
   }
 
   var reservation = function(phone_number, customer_name, chosen_date) {
@@ -135,57 +138,75 @@
               Jaki zabieg rzęs Ciebie interesuje? 
             </h2>
             <br />
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 2-3d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 2d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 2-3D
+                <i class="heart icon"></i> Przedłużanie 2D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%;">
                 <span style="color: #e03997; font-weight: 100">130 zł</span>
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 2-3d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 2d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 2-3D
+                <i class="heart icon"></i> Uzupełnianie 2D
               </div>
               <a class="ui basic teal left pointing label"  style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">110 zł</span>
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 4-5d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 3-4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 4-5D
+                <i class="heart icon"></i> Przedłużanie 3-4D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">160 zł</span>
+                <span style="color: #e03997; font-weight: 100">150 zł</span>
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 4-5d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 3-4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 4-5D
+                <i class="heart icon"></i> Uzupełnianie 3-4D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">130 zł</span>
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 6d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 5-6d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 6D
+                <i class="heart icon"></i> Przedłużanie 5-6D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">190 zł</span>
+                <span style="color: #e03997; font-weight: 100">180 zł</span>
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 6d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 5-6d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 6D
+                <i class="heart icon"></i> Uzupełnianie 5-6D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">150 zł</span>
+                <span style="color: #e03997; font-weight: 100">160 zł</span>
+              </a>
+            </div><br />
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 7-8d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Przedłużanie 7-8D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">210 zł</span>
+              </a>
+            </div>
+
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 7-8d')">
+              <div class="ui large teal button" style="width: 68%; text-align: left">
+                <i class="heart icon"></i> Uzupełnianie 7-8D
+              </div>
+              <a class="ui basic teal left pointing label" style="width: 32%">
+                <span style="color: #e03997; font-weight: 100">190 zł</span>
               </a>
             </div><br />
 
@@ -326,18 +347,17 @@
       <div class="row">
         <div class="col-md-12" style="color: #fff; text-align: center; padding: 50px">
 
-          <div class="ui horizontal list" style="margin-top: 20px">
-            <div class="item">
-              <i class="phone icon"></i>
-              <div class="content">
-                <a href="tel:+48881378603" style="color: #fff">+48 881 378 603</a>
-              </div>
+          <div class="ui horizontal list">
+            <div class="item" style="margin: 10px">
+              <i class="phone icon"></i> <a href="tel:+48881378603" style="color: #fff">+48 881 378 603</a>
             </div>
-            <div class="item">
-              <i class="marker icon"></i>
-              <div class="content">
-                ul. Zamieniecka 54 <br /> Warszawa, Praga Południe
-              </div>
+            <div class="item" style="margin: 10px">
+              <i class="marker icon"></i>  Ul. Zamieniecka 54, Warszawa, Praga Południe
+            </div>
+            <div class="item" style="margin: 10px">
+              <a href="https://www.facebook.com/joanna.lashdream/" target="_blank" style="color: #fff">
+                <i class="facebook square icon"></i> Fanpage Lashdream
+              </a>
             </div>
           </div>
 
@@ -353,79 +373,6 @@
       </div>
     </div>
   </section>
-
-<script>
-const months_fullnames = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
-
-var is_day_available = function(dates, year, month, day) {
-  const month_name = months_fullnames[month];
-  const today = new Date();
-  const checked_day = new Date(year, month, day)
-  return checked_day > today &&
-         dates[year] !== undefined &&
-         dates[year][month_name] !== undefined &&
-         dates[year][month_name][day] !== undefined
-}
-
-var is_hour_available = function(dates, year, month, day, hour) {
-  const month_name = months_fullnames[month];
-  return dates[year] !== undefined &&
-         dates[year][month_name] !== undefined &&
-         dates[year][month_name][day] !== undefined &&
-         dates[year][month_name][day].includes(hour)
-}
-
-$.getJSON('dates.json').done(function(json) {
-
-  const dates = json.available_dates;
-
-  $('#example14').calendar({
-    inline: true,
-    disableMinute: true,
-    disableYear: true,
-    disableMonth: true,
-    firstDayOfWeek: 1,
-    ampm: false,
-    text: {
-        days: ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
-        months: months_fullnames,
-        monthsShort: ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'],
-        today: 'Dzisiaj',
-        now: 'Teraz',
-        am: 'AM',
-        pm: 'PM'
-      },
-    formatter: {
-      cell: function (cell, date, cellOptions) {
-        
-        var is_available = is_day_available(dates, date.getFullYear(), date.getMonth(), date.getDate()) &&
-                           (cellOptions.mode != "hour" || is_hour_available(dates, date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()))
-
-        if (is_available) {
-          cell.toggleClass('disabled', false)
-          cell.toggleClass('available-date', true)
-        } else {
-          cell.toggleClass('disabled', true)
-          cell.toggleClass('available-date', false)
-        }
-
-        if (cellOptions.active) {
-          chosen_date = date.toLocaleString("pl-PL");
-          $("#step3_date").html(chosen_date)
-          switch_view("#step2", "#step3")
-        }
-      }
-    },
-    className: {
-        activeCell: 'chosen-date'
-    }
-  });
-
-}).fail(function( jqxhr, textStatus, error ) {
-  console.log("Request Failed: " + textStatus + ", " + error);
-});
-
-</script>
 
   <script src="js/jquery.easing.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
