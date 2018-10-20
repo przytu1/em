@@ -5,6 +5,10 @@
     Author URL: https://bootstrapmade.com
 */
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
 body {
 	line-height: 1.4;
 	font-family: 'Roboto', sans-serif !important;
@@ -41,6 +45,7 @@ a:hover, a:focus, a:active{
 Responsive media queries
 ************************************
 ***********************************/
+
 .topheader {
     background: url('../img/bg-banner04.jpg') no-repeat fixed;
     background-size: cover;
@@ -145,12 +150,11 @@ Responsive media queries
 	font-size: 24px;
 }
 .about-text {
-    padding-top: 25px;
+    padding-top: 0px;
 }
 .about-text p{
     font-size: 1.2em;
 	color: #444;
-    font-style: italic;
     font-weight: 100;
     margin-bottom: 20px;
 }
