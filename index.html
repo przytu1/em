@@ -44,6 +44,54 @@
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
+  <div id="hitherepopup" class="modal fade in" role="dialog">
+    <div style="padding: 20px">
+      <div class="modal-dialog" style="margin: 20px auto; height: 90%">
+        
+        <!-- Modal content-->
+        <div class="modal-content row" style="height: 100%">
+          <div class="modal-header custom-modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Dzień dobry :)</h4>
+          </div>
+          <div class="modal-body" style="text-align: center">
+              <img src="img/lashdream-joanna-popup.jpg" style="height: 150px; margin-bottom: 10px" />
+              <div style="margin-bottom: 20px">
+                Dziękuję za Twoje zainteresowanie! W czym mogę Ci pomóc?
+                Twoja odpowiedź pomoże mi lepiej dostosować ofertę do potrzeb klientek.
+              </div>
+
+              <button class="ui left labeled icon small button" data-dismiss="modal" style="margin: 10px; width: 90%">
+                <i class="question icon"></i>
+                Jeszcze nigdy nie przedłużałam rzęs
+              </button>
+
+              <button class="ui left labeled icon small button" data-dismiss="modal" style="margin: 10px; width: 90%">
+                <i class="plus icon"></i>
+                Szukam objętości powyżej 10 D
+              </button>
+
+              <button class="ui left labeled icon small button" data-dismiss="modal" style="margin: 10px; width: 90%">
+                <i class="eye icon"></i>
+                Chcę jeszcze pooglądać galerię
+              </button>
+
+              <a href="zabiegi.html">
+                <button class="ui left labeled icon teal small button" style="margin: 10px;  width: 90%">
+                  <i class="right arrow icon"></i>
+                  Umów się na zabieg
+                </button>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <div style="height: 100%">
     <div style="height: calc(100% - 70px); overflow: auto;">
 
@@ -104,7 +152,7 @@
                 <p>Cierpliwość i dążenie do perfekcji to cechy niezbędne u dobrej stylistki rzęs. Decydując się na przedłużanie rzęs u mnie, możesz być pewna efektu robiącego wrażenie. Każda z Was jest wyjątkowa i każda zasługuje na magnetyzujące spojrzenie. Dzięki mojemu doświadczeniu mogę zaproponować najlepszą stylizację, dostosowaną do Twojego typu oka.</p>
                 <p>Zapraszam na zabiegi w miłej atmosferze, w przytulnym lokalu na Pradze Południe.</p>
                 <p>Dostępne zabiegi:</p>
-                <p><b>Przedłużanie rzęs metodami 2D, 3D, 4D, 5D, 6D, 7D</b></p>
+                <p><b>Przedłużanie rzęs metodami 2D, 3D, 4D, 5D, 6D, 7D, 8D</b></p>
               </div>
             </div>
             <div class="col-md-6 text-right">
@@ -148,7 +196,7 @@
 
                   <div class="ui fluid card">
                     <div class="image">
-                      <img src="img/portfolio18.jpg">
+                      <img src="img/portfolio18.jpg" id="hithere_trigger">
                     </div>
                     <div class="content"> Rzęsy 3D </div>
                   </div>
@@ -349,6 +397,14 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/wow.js"></script>
   <script src="js/custom.js"></script>
+
+  <script>
+  $(window).load(function(){
+    setTimeout(function() {
+      $('#hitherepopup').modal('show');
+    }, 30000);
+  });
+  </script>
 
 </body>
 

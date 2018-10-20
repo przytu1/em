@@ -137,6 +137,12 @@ Responsive media queries
 	margin-bottom: -3px;
     min-height: 400px;
 }
+#reservation{
+    background: url('../img/about-banner-left.jpg') no-repeat;
+    background-size: cover;
+    margin-bottom: -3px;
+    min-height: 400px;
+}
 .section-padding{
 	padding: 20px 0px;
 }
@@ -411,6 +417,29 @@ footer {
 .reservation-input {
     width: 47%; 
     text-align: left
+}
+
+
+
+#hitherepopup {
+  -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 5s; /* Firefox < 16 */
+      -ms-animation: fadein 5s; /* Internet Explorer */
+       -o-animation: fadein 5s; /* Opera < 12.1 */
+          animation: fadein 5s;
+}
+
+.custom-modal-header {
+    text-align: center;
+    color: #17b6bb;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 4px solid;
+}
+
+.custom-modal-header .modal-title {
+    /* font-weight: bold; */
+    font-size: 18px;
 }
 
 /***********************************
