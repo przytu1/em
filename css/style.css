@@ -511,6 +511,7 @@ Responsive media queries
 
     #about {
         background: #eee;
+        min-height: 200px;
     }
 
     #contact .content {

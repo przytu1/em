@@ -82,17 +82,6 @@
       </div>
 
       <div class="mobile-content">
-        <div class="navbar-header" style="height: 300px">
-          <a class="navbar-brand" href="#"><img src="img/lashdream-logo.png" id="logo" style="border: 0" /></a>
-          <br />
-          <div style="text-align: center; margin-top: 170px">
-            <h2>Przedłużanie Rzęs</h2>
-            <p>Perfekcyjnie wykonane, naturalny wygląd</p>
-            <span style="font-size: 10px; color: #888">
-              <i class="fas fa-angle-double-down"></i> &nbsp; zobacz niżej galerię, cennik i zapisy &nbsp; <i class="fas fa-angle-double-down"></i>
-            </span>
-          </div>
-        </div>
         <img src="img/bg-banner04.jpg" style="width: 100%" />
       </div>
 
@@ -101,7 +90,6 @@
           <div class="row">
             <div class="col-md-6 text-left">
               <div class="about-text">
-                <p>Cierpliwość i dążenie do perfekcji to cechy niezbędne u dobrej stylistki rzęs. Decydując się na przedłużanie rzęs u mnie, możesz być pewna efektu robiącego wrażenie. Każda z Was jest wyjątkowa i każda zasługuje na magnetyzujące spojrzenie. Dzięki mojemu doświadczeniu mogę zaproponować najlepszą stylizację, dostosowaną do Twojego typu oka.</p>
                 <p>Zapraszam na zabiegi w miłej atmosferze, w przytulnym lokalu na Pradze Południe.</p>
                 <p>Dostępne zabiegi:</p>
                 <p><b>Przedłużanie rzęs metodami 2D, 3D, 4D, 5D, 6D, 7D, 8D</b></p>
@@ -337,9 +325,9 @@
     </div>
     <a href="zabiegi.html">
       <div style="height: 70px; background: #00b5ad; text-align: center;">
-        <button id="rezerwuj" class="ui right labeled icon big teal button" style="margin: 10px">
-          <i class="right arrow icon"></i>
-          Umów się na zabieg
+        <button class="ui right labeled icon big teal button" style="margin: 5px">
+          <i class="right arrow icon" id="rezerwuj" style="background: none; font-size: 2em; padding-left: 10px"></i>
+          Kliknij tutaj aby<br /> umówić się na rzęsy
         </button>
       </div>
     </a>
@@ -352,7 +340,7 @@
 
   <script>
   var repeatAnimation = function() {
-    $('#rezerwuj').transition('tada');
+    $('#rezerwuj').transition('jiggle');
     setTimeout(repeatAnimation, 3000);
   }
 
