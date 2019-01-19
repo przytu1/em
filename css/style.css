@@ -138,8 +138,8 @@ Responsive media queries
     min-height: 400px;
 }
 #reservation{
-    background: url('../img/about-banner-left.jpg') no-repeat;
-    background-size: cover;
+    /*background: url('../img/about-banner-left.jpg') no-repeat;*/
+    /*background-size: cover;*/
     margin-bottom: -3px;
     min-height: 400px;
 }
@@ -151,9 +151,9 @@ Responsive media queries
 	margin-bottom: 50px;
 }
 .title-text{
-	padding: 0px 25px 0px 0px;
-	border-right: 5px solid #15d6c6;
-	font-size: 24px;
+	padding: 0px 0px 0px 25px;
+	border-left: 5px solid #15d6c6;
+	font-size: 20px;
 }
 .about-text {
     padding-top: 0px;
@@ -387,8 +387,7 @@ footer {
 }
 
 #confirmation-div {
-    float: right;
-    margin-bottom: 20px;
+    margin: auto;
     width: 55%;
     text-align: left;
 }
@@ -403,15 +402,15 @@ footer {
 }
 
 #success-div, #failure-div {
-    width: 400px; 
-    float: right; 
-    text-align: center; 
+    margin: auto;
+    width: 55%;
+    text-align: left;
     font-size: 1.5em; 
     font-weight: 100
 }
 
 #reservation_button {
-    width: 55%;
+    width: 70%;
 }
 
 .reservation-input {
