@@ -446,11 +446,6 @@ footer {
 Responsive media queries
 ************************************
 ***********************************/
-@media (min-width: 551px) {
-    #confirmation-div {
-        min-width: 550px;
-    }
-}
 @media (min-width: 551px) and (max-width: 980px){
 	.title-text{
 	margin-bottom: 15px;
