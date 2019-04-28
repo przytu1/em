@@ -140,7 +140,7 @@
             <br />
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 2d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 2D
+                <i class="calendar check icon"></i> Przedłużanie 2D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%;">
                 <span style="color: #e03997; font-weight: 100">140 zł</span>
@@ -149,7 +149,7 @@
 
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 2d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 2D
+                <i class="calendar check icon"></i> Uzupełnianie 2D
               </div>
               <a class="ui basic teal left pointing label"  style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">110 zł</span>
@@ -158,7 +158,7 @@
 
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 3-4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 3-4D
+                <i class="calendar check icon"></i> Przedłużanie 3-4D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">160 zł</span>
@@ -167,7 +167,7 @@
 
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 3-4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 3-4D
+                <i class="calendar check icon"></i> Uzupełnianie 3-4D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">130 zł</span>
@@ -176,7 +176,7 @@
 
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 5-6d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Przedłużanie 5-6D
+                <i class="calendar check icon"></i> Przedłużanie 5-6D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">190 zł</span>
@@ -185,7 +185,7 @@
 
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 5-6d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Uzupełnianie 5-6D
+                <i class="calendar check icon"></i> Uzupełnianie 5-6D
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">160 zł</span>
@@ -194,7 +194,7 @@
 
             <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('usuniecie rzes')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="heart icon"></i> Zdejmowanie rzęs
+                <i class="calendar check icon"></i> Zdejmowanie rzęs
               </div>
               <a class="ui basic teal left pointing label" style="width: 32%">
                 <span style="color: #e03997; font-weight: 100">30 zł</span>
@@ -228,16 +228,18 @@
 
 
           <div id="step3">
-            <h2 class="title-text">
-              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/2</a>
-              Podaj informacje
-            </h2>
-            <br />
 
             <div id="confirmation-div">
+
+              <h2 class="title-text">
+                <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/2</a>
+                Podaj informacje
+              </h2>
+              <br />
+
               <span id="step3_txt">
                 <b>Wybrany zabieg:</b> <span id="step3_desc"></span>
-                Po odebraniu Twojej rezerwacji <span style="color: #e61a8d">jeszcze dzisiaj</span> otrzymasz ode mnie potwierdzenie umówienia wizyty.</span>
+                Po odebraniu Twojej rezerwacji otrzymasz ode mnie potwierdzenie umówienia wizyty. <span style="color: #e61a8d">W dniach 30.04 - 9.05 potwierdzam wizytę w ciągu 48h</span></span>
               </span>
               <br /><br />
 
@@ -279,12 +281,13 @@
               <i class="calendar check outline icon"></i>
               Akceptuję i rezerwuję wizytę
              </button>
-            </div>
-            <div id="back-div">
-             <button class="ui small labeled icon button" onclick="switch_view('#step3','#step1')" style="margin: 5px">
-              <i class="left arrow icon"></i>
-              Cofnij
-             </button>
+
+              <div id="back-div">
+               <button class="ui small labeled icon button" onclick="switch_view('#step3','#step1')" style="margin-top: 15px">
+                <i class="left arrow icon"></i>
+                Cofnij
+               </button>
+              </div>
             </div>
           </div>
 

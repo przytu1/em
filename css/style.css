@@ -151,8 +151,7 @@ Responsive media queries
 	margin-bottom: 50px;
 }
 .title-text{
-	padding: 0px 0px 0px 25px;
-	border-left: 5px solid #15d6c6;
+	/*border-left: 5px solid #15d6c6;*/
 	font-size: 20px;
 }
 .about-text {
@@ -366,6 +365,11 @@ footer {
     width: 150px;
 }
 
+#step1, #step2, #step3 {
+    max-width: 800px;
+    margin: auto;
+}
+
 #contact .content {
     font-size: 1.5em; 
     font-weight: 100
@@ -398,7 +402,6 @@ footer {
 
 #back-div {
     width: 400px; 
-    float: right
 }
 
 #success-div, #failure-div {
@@ -410,7 +413,7 @@ footer {
 }
 
 #reservation_button {
-    width: 70%;
+    width: 100%;
 }
 
 .reservation-input {
