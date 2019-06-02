@@ -444,6 +444,10 @@ footer {
     font-size: 18px;
 }
 
+.button {
+    cursor: pointer;
+}
+
 /***********************************
 ************************************
 Responsive media queries
@@ -531,6 +535,10 @@ Responsive media queries
     .reservation-input {
         width: 53%;
         font-size: 0.9em !important;
+    }
+
+    .button {
+        width: 100%;
     }
 
 }

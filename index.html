@@ -96,7 +96,9 @@
               <div class="about-text">
                 <p><b>Lash Dream - Przedłużanie Rzęs</p>
                 <p>Zapraszam na zabiegi w miłej atmosferze, w przytulnym lokalu na Pradze Południe. <b>Przedłużanie rzęs metodami 2D, 3-4D, 5-6D</b>. Poniżej znajdziesz cennik, galerię zdjęć i opinie zadowolonych klientek. Zapraszam do kontaktu telefonicznego lub rezerwacji online <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/160/winking-face_1f609.png" style="width: 20px" alt=":)" /></p>
-                <button class="ui big teal button">Umów się na wizytę</button>
+                <a href="zabiegi.html" onclick="ga('send', 'event', 'Go to reservation', 'click', 'button');">
+                  <button class="ui big teal button">Umów się na wizytę</button>
+                </a>
                 <p></p>
               </div>
             </div>
@@ -166,6 +168,17 @@
                       <img src="img/portfolio21.jpg">
                     </div>
                     <div class="content"> Rzęsy 3D </div>
+                  </div>
+
+
+                  <div class="ui fluid card">
+                    <a href="https://mailchi.mp/bb21509ca580/lashdream" target="_blank" onclick="ga('send', 'event', 'Go to promotion', 'click', 'button');">
+                      <button class="ui big red button" style="width: 100%">
+                        <i class="hand pointer outline icon"></i>
+                        Kliknij aby skorzystać z promocji
+                      </button>
+                    </a>
+                    <div class="content" style="text-align: center"> Promocja! -25% na każdą stylizację w wybranych terminach </div>
                   </div>
 
 
@@ -285,6 +298,21 @@
                 </div>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-4 col-sm-4">
+                <div class="ui fluid card">
+                  <a href="https://mailchi.mp/bb21509ca580/lashdream" target="_blank" onclick="ga('send', 'event', 'Go to promotion', 'click', 'button');">
+                    <button class="ui big red button" style="width: 100%">
+                      <i class="hand pointer outline icon"></i>
+                      Kliknij aby skorzystać z promocji
+                    </button>
+                  </a>
+                  <div class="content" style="text-align: center"> Promocja! -25% na każdą stylizację w wybranych terminach </div>
+                </div>
+              </div>
+            </div>
+
           </div>
       </section>
 
@@ -318,7 +346,7 @@
     </div>
     <a href="zabiegi.html" onclick="ga('send', 'event', 'Go to reservation', 'click', 'button');">
       <div style="height: 70px; background: #00b5ad; text-align: center;">
-        <button class="ui right labeled icon big teal button" style="margin: 5px">
+        <button class="ui right labeled icon big teal button">
           <i class="right arrow icon" id="rezerwuj" style="background: none; font-size: 2em; padding-left: 10px; color: #ff0"></i>
           Kliknij tutaj aby <br /> umówić się na rzęsy
         </button>
