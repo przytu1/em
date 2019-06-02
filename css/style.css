@@ -492,6 +492,7 @@ Responsive media queries
 
     .topheader {
         background-position: right;
+        background-position-x: -780px !important;
     }
 
     .desktop-content {
