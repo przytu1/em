@@ -72,6 +72,7 @@
 
   var choose_service = function(service) {
     chosen_service = service;
+    ga('send', 'event', 'Wybrano rodzaj stylizacji', 'click', 'button');
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
     switch_view("#step1", "#step3")
@@ -99,6 +100,8 @@
       alert("Proszę określić preferowany termin wizyty")
       return 
     }
+
+    ga('send', 'event', 'Wysłano formularz rezerwacji', 'click', 'button');
 
     var template_params = {
       chosen_service: chosen_service,
