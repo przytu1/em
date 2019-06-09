@@ -47,7 +47,7 @@ Responsive media queries
 ***********************************/
 
 .topheader {
-    background: url('../img/bg-banner04.jpg') no-repeat fixed;
+    background: url('../img/bg-banner06.jpg') no-repeat fixed;
     background-size: cover;
     min-height: 500px;
     background-position: center;
@@ -381,7 +381,7 @@ footer {
 
 #step2, #step3, #step_success, #step_failure {
     display: none; 
-    text-align: right
+    text-align: left
 }
 
 #calendar-div, #info-div {
@@ -496,7 +496,7 @@ Responsive media queries
 
     .topheader {
         background-position: right;
-        background-position-x: -780px !important;
+        background-position-x: -950px !important;
     }
 
     .desktop-content {

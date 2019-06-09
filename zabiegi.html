@@ -72,7 +72,6 @@
 
   var choose_service = function(service) {
     chosen_service = service;
-    ga('send', 'event', 'Wybrano rodzaj stylizacji', 'click', 'button');
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
     switch_view("#step1", "#step3")
@@ -100,8 +99,6 @@
       alert("Proszę określić preferowany termin wizyty")
       return 
     }
-
-    ga('send', 'event', 'Wysłano formularz rezerwacji', 'click', 'button');
 
     var template_params = {
       chosen_service: chosen_service,
@@ -141,7 +138,7 @@
               Jaki zabieg rzęs Ciebie interesuje? 
             </h2>
             <br />
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 2d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('przedluzanie 2d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Przedłużanie 2D
               </div>
@@ -150,7 +147,7 @@
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 2d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('uzupelnianie 2d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Uzupełnianie 2D
               </div>
@@ -159,7 +156,7 @@
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 3-4d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('przedluzanie 3-4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Przedłużanie 3-4D
               </div>
@@ -168,7 +165,7 @@
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 3-4d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('uzupelnianie 3-4d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Uzupełnianie 3-4D
               </div>
@@ -177,7 +174,7 @@
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('przedluzanie 5-6d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('przedluzanie 5-6d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Przedłużanie 5-6D
               </div>
@@ -186,7 +183,7 @@
               </a>
             </div>
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('uzupelnianie 5-6d')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('uzupelnianie 5-6d')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Uzupełnianie 5-6D
               </div>
@@ -195,7 +192,7 @@
               </a>
             </div><br />
 
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="choose_service('usuniecie rzes')">
+            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('usuniecie rzes')">
               <div class="ui large teal button" style="width: 68%; text-align: left">
                 <i class="calendar check icon"></i> Zdejmowanie rzęs
               </div>
@@ -242,7 +239,7 @@
 
               <span id="step3_txt">
                 <b>Wybrany zabieg:</b> <span id="step3_desc"></span>
-                Po odebraniu Twojej rezerwacji otrzymasz ode mnie potwierdzenie umówienia wizyty. <span style="color: #e61a8d">W dniach 30.04 - 9.05 potwierdzam wizytę w ciągu 48h</span></span>
+                Po odebraniu Twojej rezerwacji otrzymasz ode mnie potwierdzenie umówienia wizyty.</span>
               </span>
               <br /><br />
 
@@ -280,7 +277,7 @@
                 </div>
               </div>
 
-             <button id="reservation_button" class="ui big labeled teal icon button" onclick="reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
+             <button id="reservation_button" class="ui big labeled teal icon button" onclick="ga('send', 'event', 'Requested reservation', 'click', 'button');reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
               <i class="calendar check outline icon"></i>
               Akceptuję i rezerwuję wizytę
              </button>
@@ -296,12 +293,13 @@
 
 
           <div id="step_success">
-            <h2 class="title-text">
-              Dziękuję!
-            </h2>
-            <br />
-
+            
             <div id="success-div">
+              <h2 class="title-text">
+                Dziękuję!
+              </h2>
+              <br />
+
               Prośba o rezerwację wizyty została do mnie wysłana.
               <span style="color: #e61a8d">Dzisiaj</span> skontaktuję się z Tobą z potwierdzeniem umówienia wizyty!
               <br /><br /><br />
@@ -310,6 +308,15 @@
                 <i class="mobile alternate icon"></i>
                 <i class="comment outline icon"></i>
               </span>
+              <br /><br />
+              Jeśli chcesz otrzymywać ode mnie powiadomienia o terminach promocyjnych w cenie -25% kliknij poniżej:
+              <br /><br />
+              <a href="https://mailchi.mp/bb21509ca580/lashdream" target="_blank" onclick="ga('send', 'event', 'Go to promotion', 'click', 'button');">
+                <button class="ui big red button" style="width: 100%">
+                  <i class="hand pointer outline icon"></i>
+                  Kliknij aby skorzystać z promocji
+                </button>
+              </a>
             </div>
           </div>
 
