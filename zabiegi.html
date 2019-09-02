@@ -79,7 +79,7 @@
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
     switch_view("#step1", "#step3")
-    setTimeout(() => { if (!started_typing) $("#phone").focus() }, 5000);
+    setTimeout(() => { if (!started_typing) $("#phone").focus() }, 20000);
   }
 
   var switch_view = function(fromStep, toStep) {
