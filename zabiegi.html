@@ -78,6 +78,7 @@
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
     switch_view("#step1", "#step3")
+    setTimeout(() => $("#phone").focus(), 3000);
   }
 
   var switch_view = function(fromStep, toStep) {
