@@ -50,6 +50,7 @@
   <script>
   var chosen_service = null;
   var chosen_date = null;
+  var started_typing = false;
 
 
   var service_desc_przedluzanie = function(name) {
@@ -78,7 +79,7 @@
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
     switch_view("#step1", "#step3")
-    setTimeout(() => $("#phone").focus(), 3000);
+    setTimeout(() => { if (!started_typing) $("#phone").focus() }, 5000);
   }
 
   var switch_view = function(fromStep, toStep) {
@@ -257,7 +258,7 @@
                   Proszę podać numer telefonu:
                 </div>
                 <div class="ui input" style="width: 100%;">
-                  <input type="text" id="phone" autocomplete="tel" />
+                  <input type="text" id="phone" autocomplete="tel" onclick="started_typing = true" />
                 </div>
               </div>
 
@@ -267,7 +268,7 @@
                   Imię i nazwisko:
                 </div>
                 <div class="ui input" style="width: 100%;">
-                  <input type="text" id="name" autocomplete="name" />
+                  <input type="text" id="name" autocomplete="name" onclick="started_typing = true" />
                 </div>
               </div>
 
@@ -277,7 +278,7 @@
                   Jaki termin Panią interesuje? (9 - 20:00, 7 dni w tyg.)
                 </div>
                 <div class="ui input" style="width: 100%;">
-                  <input type="text" id="termin" value="Dowolny najbliższy" onfocus="if (this.value == 'Dowolny najbliższy') this.value='';" />
+                  <input type="text" id="termin" value="Dowolny najbliższy" onfocus="started_typing = true; if (this.value == 'Dowolny najbliższy') this.value='';" />
                 </div>
               </div>
 
