@@ -79,7 +79,12 @@
     $("#step2_desc").html(service_descriptions[service])
     $("#step3_desc").html(service_descriptions[service])
     switch_view("#step1", "#step3")
-    setTimeout(() => { if (!started_typing) $("#phone").focus() }, 20000);
+    setTimeout(() => { 
+      if (!started_typing) {
+        $("#phone").focus() 
+        $("html, body").animate({ scrollTop: $("#form-top").offset().top }, "slow");
+      }
+    }, 20000);
   }
 
   var switch_view = function(fromStep, toStep) {
@@ -252,7 +257,7 @@
 
               <br /><br />
              
-              <div style="width: 100%; margin-bottom: 10px;">
+              <div style="width: 100%; margin-bottom: 10px;" id="form-top">
                 <div class="ui label reservation-input" style="width: 100%;">
                   <i class="phone icon"></i>
                   Proszę podać numer telefonu:
