@@ -48,43 +48,28 @@
   <script type="text/javascript">(function(){ emailjs.init("user_TuybsFctQQeHmUSgacGvH"); })();</script>
 
   <script>
-  var chosen_service = null;
+  var chosen_service = "przedluzanie";
+  var chosen_method = "3-4D";
   var chosen_date = null;
-  var started_typing = false;
+  var checked_price = false;
 
-
-  var service_desc_przedluzanie = function(name) {
-    return 'Przedłużanie rzęs ' + name + '. Zabieg trwa około 2.5h.'
+  var prices = {
+    "2D": { "przedluzanie": "140 zł", "uzupelnianie": "110 zł" },
+    "3-4D": { "przedluzanie": "160 zł", "uzupelnianie": "130 zł" },
+    "5-6D": { "przedluzanie": "190 zł", "uzupelnianie": "160 zł" },
   }
 
-  var service_desc_uzupelnianie = function(name) {
-    const note = ' <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.'
-    return 'Uzupelnianie rzęs ' + name + ' (do 3 tygodni od ostatniej aplikacji). Zabieg trwa około 2.5h.' + note;
-  }
-
-  var service_descriptions = {
-    'przedluzanie 2d': service_desc_przedluzanie("2D"),
-    'uzupelnianie 2d': service_desc_uzupelnianie("2D"),
-    'przedluzanie 3-4d': service_desc_przedluzanie("3-4D"),
-    'uzupelnianie 3-4d': service_desc_uzupelnianie("3-4D"),
-    'przedluzanie 5-6d': service_desc_przedluzanie("5-6D"),
-    'uzupelnianie 5-6d': service_desc_uzupelnianie("5-6D"),
-    'przedluzanie 7-8d': service_desc_przedluzanie("7-8D"),
-    'uzupelnianie 7-8d': service_desc_uzupelnianie("7-8D"),
-    'usuniecie rzes': 'Zdejmowanie rzęs. Zabieg trwa około 30 minut.'
-  }
-
-  var choose_service = function(service) {
-    chosen_service = service;
-    $("#step2_desc").html(service_descriptions[service])
-    $("#step3_desc").html(service_descriptions[service])
-    switch_view("#step1", "#step3")
-    setTimeout(() => { 
-      if (!started_typing) {
-        $("#phone").focus() 
-        $("html, body").animate({ scrollTop: $("#form-top").offset().top }, "slow");
-      }
-    }, 20000);
+  var choose_service = function(service, method) {
+    chosen_service = ["przedluzanie", "uzupelnianie"].includes(service) ? service : "przedluzanie";
+    chosen_method = ["2D", "3-4D", "5-6D"].includes(method) ? method : "3-4D";
+    $("#price").html(prices[chosen_method][chosen_service])
+    if (!checked_price) {
+      ga('send', 'event', 'Checked price', 'click', 'button');
+      checked_price = true;
+    }
+    setTimeout(() => {
+      $('#price_label').transition('tada');
+    }, 500);
   }
 
   var switch_view = function(fromStep, toStep) {
@@ -111,7 +96,7 @@
     }
 
     var template_params = {
-      chosen_service: chosen_service,
+      chosen_service: chosen_service + " " + chosen_method,
       chosen_date: chosen_date,
       phone_number: phone_number,
       customer_name: customer_name
@@ -142,125 +127,64 @@
       <div class="row">
         <div class="col-md-12 text-right" style="margin-top: 30px">
 
-          <div id="step1" style="display: block">
-            <h2 class="title-text">
-              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 1/2</a>
-              Jaki zabieg rzęs Ciebie interesuje? 
-            </h2>
-            <br />
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('przedluzanie 2d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Przedłużanie 2D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%;">
-                <span style="color: #e03997; font-weight: 100">140 zł</span>
-              </a>
-            </div>
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('uzupelnianie 2d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Uzupełnianie 2D
-              </div>
-              <a class="ui basic teal left pointing label"  style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">110 zł</span>
-              </a>
-            </div><br />
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('przedluzanie 3-4d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Przedłużanie 3-4D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">160 zł</span>
-              </a>
-            </div>
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('uzupelnianie 3-4d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Uzupełnianie 3-4D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">130 zł</span>
-              </a>
-            </div><br />
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('przedluzanie 5-6d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Przedłużanie 5-6D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">190 zł</span>
-              </a>
-            </div>
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('uzupelnianie 5-6d')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Uzupełnianie 5-6D
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">160 zł</span>
-              </a>
-            </div><br />
-
-            <div class="ui labeled button" style="margin: 10px; width: 330px" onclick="ga('send', 'event', 'Selected service', 'click', 'button');choose_service('usuniecie rzes')">
-              <div class="ui large teal button" style="width: 68%; text-align: left">
-                <i class="calendar check icon"></i> Zdejmowanie rzęs
-              </div>
-              <a class="ui basic teal left pointing label" style="width: 32%">
-                <span style="color: #e03997; font-weight: 100">30 zł</span>
-              </a>
-            </div><br />
-
-          </div> 
-
-
-          <div id="step2">
-            <h2 class="title-text">
-              <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/3</a>
-              Wybierz termin zabiegu
-            </h2>
-            <br />
-
-            <div id="calendar-div">
-             <div class="ui calendar" id="example14"></div>
-            </div>
-            <div id="info-div">
-             <button class="ui small labeled icon button" onclick="switch_view('#step2','#step1')">
-              <i class="left arrow icon"></i>
-              Cofnij
-             </button>
-             <br />
-             <div style="padding: 10px; margin-top:30px; text-align: center">
-             <b>Wybrany zabieg:</b><br /> <span id="step2_desc"></span>
-             </div>
-            </div>
-          </div>
-
-
           <div id="step3">
 
             <div id="confirmation-div">
 
               <h2 class="title-text">
-                <a class="ui pink label" style="vertical-align: middle; margin-right: 20px">Krok 2/2</a>
-                Podaj informacje
+                Rezerwacja terminu wizyty
               </h2>
-              <br />
 
               <span id="step3_txt">
-                <b>Wybrany zabieg:</b> <span id="step3_desc"></span>
-                Po odebraniu Twojej rezerwacji otrzymasz ode mnie potwierdzenie umówienia wizyty.</span>
+                Proszę wybrać usługę oraz metodę aby zobaczyć <b>cenę zabiegu</b>. Zabieg przedłużania rzęs trwa około 2.5h. <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.</span>
               </span>
-              <br /><br />
+              <br /><br /><br />
 
-               <span id="step3_txt"><b>Przetwarzanie danych osobowych:</b> Imię i nazwisko oraz numer telefonu są przeze mnie wykorzystywane tylko i wyłącznie do kontaktu w celu potwierdzenia rezerwacji oraz zarezerwowania terminu.</span>
-
-              <br /><br />
-             
               <div style="width: 100%; margin-bottom: 10px;" id="form-top">
                 <div class="ui label reservation-input" style="width: 100%;">
+                  <i class="tag icon"></i>
+                  Proszę wybrać usługę:
+                </div>
+                <div class="ui selection dropdown" id="dropdown_service" style="width: 100%">
+                  <input type="hidden" name="usluga" id="usluga" onchange="choose_service($('#usluga').val(), $('#metoda').val())">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" style="color: #000">Przedłużanie rzęs</div>
+                  <div class="menu">
+                    <div class="item" data-value="przedluzanie">Przedłużanie rzęs</div>
+                    <div class="item" data-value="uzupelnianie">Uzupełnianie rzęs</div>
+                  </div>
+                </div>
+              </div>
+              <script>$('#dropdown_service').dropdown();</script>
+
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label reservation-input" style="width: 100%;">
+                  <i class="tag icon"></i>
+                  Metoda:
+                </div>
+                <div class="ui selection dropdown" id="dropdown_method" style="width: 100%">
+                  <input type="hidden" name="metoda" id="metoda" onchange="choose_service($('#usluga').val(), $('#metoda').val())">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" style="color: #000">3-4D</div>
+                  <div class="menu">
+                    <div class="item" data-value="2D">2D</div>
+                    <div class="item" data-value="3-4D">3-4D</div>
+                    <div class="item" data-value="5-6D">5-6D</div>
+                  </div>
+                </div>
+              </div>
+              <script>$('#dropdown_method').dropdown();</script>
+
+              <div style="width: 100%; margin-bottom: 30px; text-align: right">
+                  Cena wybranego zabiegu:
+                  <div style="float: right; margin-left: 10px"><div id="price_label"><a class="ui teal tag label"><span id="price">160 zł</span></a></div></div>
+              </div>
+                
+
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label reservation-input" style="width: 100%;">
                   <i class="phone icon"></i>
-                  Proszę podać numer telefonu:
+                  Numer telefonu do potwierdzenia rezerwacji:
                 </div>
                 <div class="ui input" style="width: 100%;">
                   <input type="text" id="phone" autocomplete="tel" onclick="started_typing = true" />
@@ -280,24 +204,21 @@
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label reservation-input" style="width: 100%;">
                   <i class="calendar icon"></i>
-                  Jaki termin Panią interesuje? (9 - 20:00, 7 dni w tyg.)
+                  Jaki termin Panią interesuje? (8 - 19:00, pon-sob)
                 </div>
                 <div class="ui input" style="width: 100%;">
-                  <input type="text" id="termin" value="Dowolny najbliższy" onfocus="started_typing = true; if (this.value == 'Dowolny najbliższy') this.value='';" />
+                  <input type="text" id="termin" value="Dowolny najbliższy" onfocus="if (this.value == 'Dowolny najbliższy') this.value='';" />
                 </div>
               </div>
+
+               <span id="step3_txt">Imię i nazwisko oraz numer telefonu są przeze mnie wykorzystywane tylko i wyłącznie do kontaktu w celu potwierdzenia rezerwacji oraz zarezerwowania terminu. Po wysłaniu formularza skontaktuję się w celu potwierdzenia wizyty.</span>
+
+              <br /><br />
 
              <button id="reservation_button" class="ui big labeled teal icon button" onclick="ga('send', 'event', 'Requested reservation', 'click', 'button');reservation($('#phone').val(), $('#name').val(), $('#termin').val())">
               <i class="hand pointer icon"></i>
-              Akceptuję i rezerwuję wizytę
+              Rezerwuję wizytę
              </button>
-
-              <div id="back-div">
-               <button class="ui small labeled icon button" onclick="switch_view('#step3','#step1')" style="margin-top: 15px">
-                <i class="left arrow icon"></i>
-                Cofnij
-               </button>
-              </div>
             </div>
           </div>
 
@@ -347,34 +268,14 @@
       </div>
     </div>
   </section>
-  <section id="contact" style="margin-top: 0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12" style="color: #fff; text-align: center; padding: 50px">
 
-          <div class="ui horizontal list">
-            <div class="item" style="margin: 10px">
-              <i class="phone icon"></i> <a href="tel:+48881378603" style="color: #fff">+48 881 378 603</a>
-            </div>
-            <div class="item" style="margin: 10px">
-              <i class="marker icon"></i>  Ul. Zamieniecka 54, Warszawa, Praga Południe
-            </div>
-            <div class="item" style="margin: 10px">
-              <a href="https://www.facebook.com/joanna.lashdream/" target="_blank" style="color: #fff">
-                <i class="facebook square icon"></i> Fanpage Lashdream
-              </a>
-            </div>
-          </div>
 
+  <section style="text-align: center; padding: 20px">
           <div class="ui small images" style="margin-top: 30px">
-            <img src="img/portfolio40.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
-            <img src="img/portfolio46.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
-            <img src="img/portfolio45.jpg" style="margin: 30px; border: 1px dashed #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio40.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio46.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
+            <img src="img/portfolio45.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
           </div>
-
-        </div>
-      </div>
-    </div>
   </section>
 
   <script src="js/jquery.easing.min.js"></script>

@@ -365,7 +365,7 @@ footer {
     width: 150px;
 }
 
-#step1, #step2, #step3 {
+#step3 {
     max-width: 800px;
     margin: auto;
 }
@@ -379,7 +379,7 @@ footer {
     margin-bottom: 10px;
 }
 
-#step2, #step3, #step_success, #step_failure {
+#step_success, #step_failure {
     display: none; 
     text-align: left
 }
