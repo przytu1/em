@@ -90,7 +90,7 @@ Responsive media queries
 }
 
 .bg-color{
-	background-color: RGBA(0, 0, 0, 0.5);
+	background-color: RGBA(0, 0, 0, 0.1);
 	min-height: 650px;
 }
 .navbar-border{
@@ -359,9 +359,9 @@ footer {
 }
 
 #logo {
-    border: 1px dashed #009c95; 
+    /*border: 1px dashed #009c95; */
     padding: 2px; 
-    background: #fff;
+    /*background: #fff;*/
     width: 150px;
 }
 
@@ -491,12 +491,12 @@ Responsive media queries
 @media (max-width:768px) {
     #logo {
         margin: auto;
-        width: 150px;
+        width: 200px;
     }
 
     .topheader {
         background-position: right;
-        background-position-x: -950px !important;
+        background-position-x: -900px !important;
     }
 
     .desktop-content {
@@ -508,7 +508,7 @@ Responsive media queries
     }
 
     .banner-text h2, .banner-text p {
-        opacity: 0.3;
+        opacity: 0.7;
     }
 
     #about {

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>★ Przedłużanie Rzęs Warszawa | Rezerwacja terminu wizyty</title>
-  <meta name="description" content="Rezerwacje online. Metoda 2-3D 130zł, 4-5D 160zł, 6D 190zł.">
+  <meta name="description" content="Rezerwacje online. Metoda 2D 150zł, 3D 170zł, 4D 180zł, 5D 190zł, 6D 200zł, 7D 210zł.">
   <meta name="keywords" content="przedłużanie rzęs stylizacja zagęszczanie kocie oko kępki rzęsy oczy uroda">
 
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
@@ -49,19 +49,22 @@
 
   <script>
   var chosen_service = "przedluzanie";
-  var chosen_method = "3-4D";
+  var chosen_method = "3D";
   var chosen_date = null;
   var checked_price = false;
 
   var prices = {
-    "2D": { "przedluzanie": "140 zł", "uzupelnianie": "110 zł" },
-    "3-4D": { "przedluzanie": "160 zł", "uzupelnianie": "130 zł" },
-    "5-6D": { "przedluzanie": "190 zł", "uzupelnianie": "160 zł" },
+    "2D": { "przedluzanie": "150 zł", "uzupelnianie": "120 zł" },
+    "3D": { "przedluzanie": "170 zł", "uzupelnianie": "140 zł" },
+    "4D": { "przedluzanie": "180 zł", "uzupelnianie": "150 zł" },
+    "5D": { "przedluzanie": "190 zł", "uzupelnianie": "160 zł" },
+    "6D": { "przedluzanie": "200 zł", "uzupelnianie": "170 zł" },
+    "7D": { "przedluzanie": "210 zł", "uzupelnianie": "180 zł" },
   }
 
   var choose_service = function(service, method) {
     chosen_service = ["przedluzanie", "uzupelnianie"].includes(service) ? service : "przedluzanie";
-    chosen_method = ["2D", "3-4D", "5-6D"].includes(method) ? method : "3-4D";
+    chosen_method = ["2D", "3D", "4D", "5D", "6D", "7D"].includes(method) ? method : "3D";
     $("#price").html(prices[chosen_method][chosen_service])
     if (!checked_price) {
       ga('send', 'event', 'Checked price', 'click', 'button');
@@ -119,7 +122,7 @@
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
   <section style="text-align: center; padding: 20px">
-    <img src="img/lashdream-logo.png" width="170" />
+    <img src="img/lashdream-black.png" width="170" />
   </section>
 
   <section id="reservation" class="section-padding wow fadeIn delay-05s">
@@ -165,11 +168,14 @@
                 <div class="ui selection dropdown" id="dropdown_method" style="width: 100%">
                   <input type="hidden" name="metoda" id="metoda" onchange="choose_service($('#usluga').val(), $('#metoda').val())">
                   <i class="dropdown icon"></i>
-                  <div class="default text" style="color: #000">3-4D</div>
+                  <div class="default text" style="color: #000">3D</div>
                   <div class="menu">
                     <div class="item" data-value="2D">2D</div>
-                    <div class="item" data-value="3-4D">3-4D</div>
-                    <div class="item" data-value="5-6D">5-6D</div>
+                    <div class="item" data-value="3D">3D</div>
+                    <div class="item" data-value="4D">4D</div>
+                    <div class="item" data-value="5D">5D</div>
+                    <div class="item" data-value="6D">6D</div>
+                    <div class="item" data-value="7D">7D</div>
                   </div>
                 </div>
               </div>
@@ -177,7 +183,7 @@
 
               <div style="width: 100%; margin-bottom: 30px; text-align: right">
                   Cena wybranego zabiegu:
-                  <div style="float: right; margin-left: 10px"><div id="price_label"><a class="ui teal tag label"><span id="price">160 zł</span></a></div></div>
+                  <div style="float: right; margin-left: 10px"><div id="price_label"><a class="ui teal tag label"><span id="price">170 zł</span></a></div></div>
               </div>
                 
 
