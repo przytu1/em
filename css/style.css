@@ -448,6 +448,21 @@ footer {
     cursor: pointer;
 }
 
+.cross {
+    position: relative;
+    display: inline-block;
+}
+.cross::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+.cross::after {
+    border-bottom: 2px solid #f00;
+}
+
 /***********************************
 ************************************
 Responsive media queries

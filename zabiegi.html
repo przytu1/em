@@ -54,18 +54,37 @@
   var checked_price = false;
 
   var prices = {
-    "2D": { "przedluzanie": "150 zł", "uzupelnianie": "120 zł" },
-    "3D": { "przedluzanie": "170 zł", "uzupelnianie": "140 zł" },
-    "4D": { "przedluzanie": "180 zł", "uzupelnianie": "150 zł" },
-    "5D": { "przedluzanie": "190 zł", "uzupelnianie": "160 zł" },
-    "6D": { "przedluzanie": "200 zł", "uzupelnianie": "170 zł" },
-    "7D": { "przedluzanie": "210 zł", "uzupelnianie": "180 zł" },
+    "2D": { "przedluzanie": 150, "uzupelnianie": 120 },
+    "3D": { "przedluzanie": 170, "uzupelnianie": 140 },
+    "4D": { "przedluzanie": 180, "uzupelnianie": 150 },
+    "5D": { "przedluzanie": 190, "uzupelnianie": 160 },
+    "6D": { "przedluzanie": 200, "uzupelnianie": 170 },
+    "7D": { "przedluzanie": 210, "uzupelnianie": 180 },
   }
 
-  var choose_service = function(service, method) {
-    chosen_service = ["przedluzanie", "uzupelnianie"].includes(service) ? service : "przedluzanie";
-    chosen_method = ["2D", "3D", "4D", "5D", "6D", "7D"].includes(method) ? method : "3D";
-    $("#price").html(prices[chosen_method][chosen_service])
+  var promos = {
+    "promo-1": { "date": "19.11.2019 (wto), 9:00", "discount-in-pln": 20 },
+    "promo-2": { "date": "20.11.2019 (śro), 9:00", "discount-in-pln": 20 },
+    "promo-3": { "date": "21.11.2019 (czw), 9:00", "discount-in-pln": 20 },
+    "promo-4": { "date": "22.11.2019 (pt), 13:00", "discount-in-pln": 20 }
+  }
+
+  var choose_service = function(service, method, promo) {
+
+    chosen_method = Object.keys(prices).includes(method) ? method : "3D";
+    chosen_service = Object.keys(prices[chosen_method]).includes(service) ? service : "przedluzanie";
+
+    const promo_is_selected = Object.keys(promos).includes(promo);
+    const discount = promo_is_selected ? promos[promo]["discount-in-pln"] : 0;
+    const original_price = prices[chosen_method][chosen_service];
+    const final_price = original_price - discount;
+    const date = promo_is_selected ? "Promocja: " + promos[promo]["date"] + ", -" + discount + "zł (" + final_price + "zł)" : "Dowolny najbliższy";
+
+    $('#termin').prop("disabled", promo_is_selected);
+    $('#termin').val(date); 
+    $("#original_price").html(promo_is_selected ? original_price + " zł" : "");
+    $("#price").html(final_price + " zł");
+
     if (!checked_price) {
       ga('send', 'event', 'Checked price', 'click', 'button');
       checked_price = true;
@@ -144,48 +163,80 @@
               <br /><br /><br />
 
               <div style="width: 100%; margin-bottom: 10px;" id="form-top">
-                <div class="ui label reservation-input" style="width: 100%;">
-                  <i class="tag icon"></i>
-                  Proszę wybrać usługę:
-                </div>
-                <div class="ui selection dropdown" id="dropdown_service" style="width: 100%">
-                  <input type="hidden" name="usluga" id="usluga" onchange="choose_service($('#usluga').val(), $('#metoda').val())">
-                  <i class="dropdown icon"></i>
-                  <div class="default text" style="color: #000">Przedłużanie rzęs</div>
-                  <div class="menu">
-                    <div class="item" data-value="przedluzanie">Przedłużanie rzęs</div>
-                    <div class="item" data-value="uzupelnianie">Uzupełnianie rzęs</div>
-                  </div>
-                </div>
-              </div>
-              <script>$('#dropdown_service').dropdown();</script>
+                <div style="width: 49%; float: left">
 
-              <div style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label reservation-input" style="width: 100%;">
-                  <i class="tag icon"></i>
-                  Metoda:
-                </div>
-                <div class="ui selection dropdown" id="dropdown_method" style="width: 100%">
-                  <input type="hidden" name="metoda" id="metoda" onchange="choose_service($('#usluga').val(), $('#metoda').val())">
-                  <i class="dropdown icon"></i>
-                  <div class="default text" style="color: #000">3D</div>
-                  <div class="menu">
-                    <div class="item" data-value="2D">2D</div>
-                    <div class="item" data-value="3D">3D</div>
-                    <div class="item" data-value="4D">4D</div>
-                    <div class="item" data-value="5D">5D</div>
-                    <div class="item" data-value="6D">6D</div>
-                    <div class="item" data-value="7D">7D</div>
+                  <div class="ui label reservation-input" style="width: 100%;">
+                    <i class="tag icon"></i>
+                    Usługa:
                   </div>
+                  <div class="ui selection dropdown" id="dropdown_service" style="width: 100%; min-width: 0">
+                    <input type="hidden" name="usluga" id="usluga" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
+                    <i class="dropdown icon"></i>
+                    <div class="default text" style="color: #000">Przedłużanie rzęs</div>
+                    <div class="menu">
+                      <div class="item" data-value="przedluzanie">Przedłużanie rzęs</div>
+                      <div class="item" data-value="uzupelnianie">Uzupełnianie rzęs</div>
+                    </div>
+                  </div>
+                  <script>$('#dropdown_service').dropdown();</script>
+
+                </div>
+                <div style="width: 49%; float: right">
+
+                  <div style="width: 100%; margin-bottom: 10px;">
+                    <div class="ui label reservation-input" style="width: 100%;">
+                      <i class="tag icon"></i>
+                      Metoda:
+                    </div>
+                    <div class="ui selection dropdown" id="dropdown_method" style="width: 100%; min-width: 0">
+                      <input type="hidden" name="metoda" id="metoda" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
+                      <i class="dropdown icon"></i>
+                      <div class="default text" style="color: #000">3D</div>
+                      <div class="menu">
+                        <div class="item" data-value="2D">2D</div>
+                        <div class="item" data-value="3D">3D</div>
+                        <div class="item" data-value="4D">4D</div>
+                        <div class="item" data-value="5D">5D</div>
+                        <div class="item" data-value="6D">6D</div>
+                        <div class="item" data-value="7D">7D</div>
+                      </div>
+                    </div>
+                  </div>
+                  <script>$('#dropdown_method').dropdown();</script>
+
+                </div>
+                
+              </div>
+
+              <div class="ui label reservation-input" style="width: 100%;">
+                <i class="calendar icon"></i> Czy wybiera Pani promocyjny termin?
+              </div>
+              <div class="ui selection dropdown" id="dropdown_promo" style="width: 100%; min-width: 0; margin-bottom: 10px;">
+                <input type="hidden" name="promo" id="promo" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
+                <i class="dropdown icon"></i>
+                <div class="default text" style="color: #000">Nie, chcę wybrać własny termin</div>
+                <div class="menu" id="promo-options">
+                  <div class="item" data-value="no-promo">Nie, chcę wybrać własny termin</div>
+                  <script>
+                    Object.keys(promos).forEach(promo_key => {
+                      $("#promo-options").append('<div class="item" data-value="' + promo_key + '">Promocja: ' + promos[promo_key]["date"] + ' <span style="color: #00b5ad; font-weight: bold;">-' + promos[promo_key]["discount-in-pln"] + 'zł</span></div>');
+                    });
+                  </script>
                 </div>
               </div>
-              <script>$('#dropdown_method').dropdown();</script>
+              <script>$('#dropdown_promo').dropdown();</script>
 
               <div style="width: 100%; margin-bottom: 30px; text-align: right">
                   Cena wybranego zabiegu:
-                  <div style="float: right; margin-left: 10px"><div id="price_label"><a class="ui teal tag label"><span id="price">170 zł</span></a></div></div>
+                  <div style="float: right; margin-left: 10px">
+                    <div id="price_label">
+                      <a class="ui teal tag label">
+                        <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                        <span id="price">170 zł</span>
+                      </a>
+                    </div>
+                  </div>
               </div>
-                
 
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label reservation-input" style="width: 100%;">
@@ -240,11 +291,13 @@
               Prośba o rezerwację wizyty została do mnie wysłana.
               <span style="color: #e61a8d">Dzisiaj</span> skontaktuję się z Tobą z potwierdzeniem umówienia wizyty!
               <br /><br /><br />
-              <span style="font-size: 2em">
-                <i class="phone volume icon"></i>
-                <i class="mobile alternate icon"></i>
-                <i class="comment outline icon"></i>
-              </span>
+              <center>
+                <span style="font-size: 2em">
+                  <i class="phone volume icon"></i>
+                  <i class="mobile alternate icon"></i>
+                  <i class="comment outline icon"></i>
+                </span>
+              </center>
               <br /><br />
               Jeśli chcesz otrzymywać ode mnie powiadomienia o terminach promocyjnych w cenie -25% kliknij poniżej:
               <br /><br />
