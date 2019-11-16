@@ -174,19 +174,6 @@
                     <div class="content"> Rzęsy 5D </div>
                   </div>
 
-
-                  <div class="ui fluid card">
-                    <a href="https://mailchi.mp/bb21509ca580/lashdream" target="_blank" onclick="ga('send', 'event', 'Go to promotion', 'click', 'button');">
-                      <button class="ui big red button" style="width: 100%">
-                        <i class="hand pointer outline icon"></i>
-                        Kliknij aby skorzystać z promocji
-                      </button>
-                    </a>
-                    <div class="content" style="text-align: center"> Promocja! -25% na każdą stylizację w wybranych terminach </div>
-                  </div>
-
-
-
                   <div class="ui fluid card">
                     <div class="image">
                       <img src="img/port02.jpg">
@@ -310,7 +297,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-4 col-sm-4">
                 <div class="ui fluid card">
                   <a href="https://mailchi.mp/bb21509ca580/lashdream" target="_blank" onclick="ga('send', 'event', 'Go to promotion', 'click', 'button');">
@@ -322,7 +309,7 @@
                   <div class="content" style="text-align: center"> Promocja! -25% na każdą stylizację w wybranych terminach </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
           </div>
       </section>
@@ -357,9 +344,24 @@
     </div>
     <a href="zabiegi.html" onclick="ga('send', 'event', 'Go to reservation', 'click', 'button');">
       <div style="height: 70px; background: #00b5ad; text-align: center;">
-        <button class="ui right labeled icon big teal button">
-          <i class="right arrow icon" id="rezerwuj" style="background: none; font-size: 2em; padding-left: 10px; color: #ff0"></i>
-          Kliknij tutaj aby <br /> umówić się na rzęsy
+        <button class="ui right labeled icon big teal button" style="margin: 0; height: 70px">
+          <i class="arrow alternate circle right icon" id="rezerwuj" style="background: none; font-size: 2em; color: #fff"></i>
+          <div id="cta_text">Kliknij tutaj aby przejść <br /> do rezerwacji</div>
+          <script>
+          const cta = [
+            "Kliknij tutaj aby przejść <br /> do rezerwacji",
+            "Złap promocyjne terminy <br /> ze zniżką do <span style=\"color: #ff0\"><b>-20zł</b></span>"
+          ];
+          var counter = 1;
+          setInterval(function() {
+            $("#cta_text").transition({
+              animation: "fly right",
+              onComplete : function() {
+                $("#cta_text").html(cta[counter++ % 2]);
+              }
+            }).transition("fly right");
+          }, 6000);
+          </script>
         </button>
       </div>
     </a>
