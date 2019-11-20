@@ -63,9 +63,14 @@
   }
 
   var promos = {
-    "promo-1": { "date": "19.11.2019 (wto), 9:00", "discount-in-pln": 20 },
-    "promo-3": { "date": "21.11.2019 (czw), 9:00", "discount-in-pln": 20 },
-    "promo-4": { "date": "22.11.2019 (pt), 13:00", "discount-in-pln": 20 }
+    "promo-1": { "date": "2019-11-19, 9:00 (wto)", "discount-in-pln": 20 },
+    "promo-3": { "date": "2019-11-21, 9:00 (czw)", "discount-in-pln": 20 },
+    "promo-4": { "date": "2019-11-22, 13:00 (pt)", "discount-in-pln": 20 }
+  }
+
+  // remove outdated promos
+  for (k in promos) {
+      if (new Date() > new Date(promos[k]["date"])) delete promos[k]
   }
 
   var choose_service = function(service, method, promo) {
