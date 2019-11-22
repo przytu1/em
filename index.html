@@ -344,24 +344,9 @@
     </div>
     <a href="zabiegi.html" onclick="ga('send', 'event', 'Go to reservation', 'click', 'button');">
       <div style="height: 70px; background: #00b5ad; text-align: center;">
-        <button class="ui right labeled icon big teal button" style="margin: 0; height: 70px">
-          <i class="arrow alternate circle right icon" id="rezerwuj" style="background: none; font-size: 2em; color: #fff"></i>
-          <div id="cta_text">Kliknij tutaj aby przejść <br /> do rezerwacji</div>
-          <script>
-          const cta = [
-            "Kliknij tutaj aby przejść <br /> do rezerwacji",
-            "Złap promocyjne terminy <br /> ze zniżką do <span style=\"color: #ff0\"><b>-20zł</b></span>"
-          ];
-          var counter = 1;
-          setInterval(function() {
-            $("#cta_text").transition({
-              animation: "fly right",
-              onComplete : function() {
-                $("#cta_text").html(cta[counter++ % 2]);
-              }
-            }).transition("fly right");
-          }, 6000);
-          </script>
+        <button class="ui right labeled icon big teal button">
+          <i class="right arrow icon" id="rezerwuj" style="background: none; font-size: 2em; padding-left: 10px; color: #ff0"></i>
+          Kliknij tutaj aby <br /> umówić się na rzęsy
         </button>
       </div>
     </a>
