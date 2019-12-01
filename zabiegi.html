@@ -167,7 +167,7 @@
               </span>
               <br /><br /><br />
 
-              <div style="width: 100%; margin-bottom: 10px;" id="form-top">
+              <div style="width: 100%; margin-bottom: 10px; min-height: 70px" id="form-top">
                 <div style="width: 60%; float: left">
 
                   <div class="ui label reservation-input" style="width: 100%;">
@@ -213,23 +213,30 @@
                 
               </div>
 
-              <div class="ui label reservation-input" style="width: 100%;">
-                <i class="calendar icon"></i> Czy wybiera Pani promocyjny termin?
-              </div>
-              <div class="ui selection dropdown" id="dropdown_promo" style="width: 100%; min-width: 0; margin-bottom: 10px;">
-                <input type="hidden" name="promo" id="promo" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
-                <i class="dropdown icon"></i>
-                <div class="default text" style="color: #000">Nie, chcę wybrać własny termin</div>
-                <div class="menu" id="promo-options">
-                  <div class="item" data-value="no-promo">Nie, chcę wybrać własny termin</div>
-                  <script>
-                    Object.keys(promos).forEach(promo_key => {
-                      $("#promo-options").append('<div class="item" data-value="' + promo_key + '">Promocja: ' + promos[promo_key]["date"] + ' <span style="color: #00b5ad; font-weight: bold;">-' + promos[promo_key]["discount-in-pln"] + 'zł</span></div>');
-                    });
-                  </script>
+              <div id="promo-section">
+                <div class="ui label reservation-input" style="width: 100%;">
+                  <i class="calendar icon"></i> Czy wybiera Pani promocyjny termin?
+                </div>
+                <div class="ui selection dropdown" id="dropdown_promo" style="width: 100%; min-width: 0; margin-bottom: 10px;">
+                  <input type="hidden" name="promo" id="promo" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" style="color: #000">Nie, chcę wybrać własny termin</div>
+                  <div class="menu" id="promo-options">
+                    <div class="item" data-value="no-promo">Nie, chcę wybrać własny termin</div>
+                    <script>
+                      Object.keys(promos).forEach(promo_key => {
+                        $("#promo-options").append('<div class="item" data-value="' + promo_key + '">Promocja: ' + promos[promo_key]["date"] + ' <span style="color: #00b5ad; font-weight: bold;">-' + promos[promo_key]["discount-in-pln"] + 'zł</span></div>');
+                      });
+                    </script>
+                  </div>
                 </div>
               </div>
-              <script>$('#dropdown_promo').dropdown();</script>
+              <script>
+                $('#dropdown_promo').dropdown();
+                if (Object.keys(promos).length == 0) {
+                  $('#promo-section').hide()
+                }
+              </script>
 
               <div style="width: 100%; margin-bottom: 30px; text-align: right">
                   Cena wybranego zabiegu:
