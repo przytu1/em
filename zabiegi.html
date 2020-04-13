@@ -5,20 +5,66 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>★ Przedłużanie Rzęs Warszawa | Rezerwacja terminu wizyty</title>
-  <meta name="description" content="Rezerwacje online. Metoda 2D 150zł, 3D 170zł, 4D 180zł, 5D 190zł, 6D 200zł, 7D 210zł.">
+  <meta name="description" content="Rezerwacje online.">
   <meta name="keywords" content="przedłużanie rzęs stylizacja zagęszczanie kocie oko kępki rzęsy oczy uroda">
 
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
-  <link rel="stylesheet" type="text/css" href="css/fonts.css">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/animate.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Questrial|Satisfy">
   <link rel="stylesheet" type="text/css" class="ui" href="https://semantic-ui.com/dist/semantic.min.css">
-  <link rel="stylesheet" type="text/css" class="ui" href="css/semantic.min.css">
 
-  <script src="js/jquery-2.1.4.js"></script>
+  <script src="js/jquery-2.1.3.min.js"></script>
   <script src="js/semantic.min.js"></script>
+
+  <style>
+    .ui.label, .ui.button, .ui.selection.dropdown, .ui.input > input {
+      border-radius: 0;
+    }
+    #myPage {
+      margin: 20px;
+    }
+    #step_success, #step_failure {
+      display: none;
+      text-align: left
+    }
+    #reservation_button {
+        width: 100%;
+    }
+
+    .reservation-input {
+        width: 47%;
+        text-align: left
+    }
+    #reservation {
+      max-width: 600px;
+      margin: auto;
+    }
+    #step3_txt {
+        font-size: 0.8em;
+        font-family: Questrial;
+    }
+    body {
+      line-height: 1.4;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+      font-weight: 400;
+    }
+    .cross {
+        position: relative;
+        display: inline-block;
+    }
+    .cross::after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        right: 0;
+        top: 50%;
+    }
+    .cross::after {
+        border-bottom: 2px solid #f00;
+    }
+    .ui.selection.dropdown .menu {
+      max-height: 17rem;
+    }
+  </style>
 
   <!-- Google Analytics -->
   <script>
@@ -48,6 +94,14 @@
   <script type="text/javascript">(function(){ emailjs.init("user_TuybsFctQQeHmUSgacGvH"); })();</script>
 
   <script>
+  function getClientId() {
+    try {
+      return ga.getAll()[0].get('clientId')
+    } catch (e) {
+      return "";
+    }
+  }
+
   var chosen_service = "przedluzanie";
   var chosen_method = "3D";
   var chosen_date = null;
@@ -63,30 +117,41 @@
   }
 
   var promos = {
-    "promo-1": { "date": "2019-11-26, 9:00 (wto)", "discount-in-pln": 20 },
-    "promo-2": { "date": "2019-11-27, 9:00 (śro)", "discount-in-pln": 20 },
-    "promo-3": { "date": "2019-11-27, 13:00 (śro)", "discount-in-pln": 20 },
-    "promo-4": { "date": "2019-11-29, 9:00 (pt)", "discount-in-pln": 20 }
+    "promo-1": { "date": "wczesnie-rano", "discount-in-pln": 10 },
+    "promo-2": { "date": "przed-poludniem", "discount-in-pln": 15 }
   }
 
   // remove outdated promos
-  for (k in promos) {
-      if (new Date() > new Date(promos[k]["date"])) delete promos[k]
+  // for (k in promos) {
+  //     if (new Date() > new Date(promos[k]["date"])) delete promos[k]
+  // }
+
+  var update_preference = function() {
+    choose_service(
+      $('#usluga').val(),
+      $('#metoda').val(),
+      $('#wczesnie-rano').is(':checked'),
+      $('#przed-poludniem').is(':checked')
+    )
   }
 
-  var choose_service = function(service, method, promo) {
+  var choose_service = function(service, method, promo_1 = false, promo_2 = false) {
 
     chosen_method = Object.keys(prices).includes(method) ? method : "3D";
     chosen_service = Object.keys(prices[chosen_method]).includes(service) ? service : "przedluzanie";
+
+    var promo = "";
+    if (promo_2) {
+      promo = "promo-2";
+    } else if (promo_1) {
+      promo = "promo-1";
+    }
 
     const promo_is_selected = Object.keys(promos).includes(promo);
     const discount = promo_is_selected ? promos[promo]["discount-in-pln"] : 0;
     const original_price = prices[chosen_method][chosen_service];
     const final_price = original_price - discount;
-    const date = promo_is_selected ? "Promocja: " + promos[promo]["date"] + ", -" + discount + "zł (" + final_price + "zł)" : "Dowolny najbliższy";
 
-    $('#termin').prop("disabled", promo_is_selected);
-    $('#termin').val(date); 
     $("#original_price").html(promo_is_selected ? original_price + " zł" : "");
     $("#price").html(final_price + " zł");
 
@@ -114,30 +179,31 @@
 
     if (customer_name.length == 0) {
       alert("Proszę podać imię")
-      return 
+      return
     }
 
     if (chosen_date.length == 0) {
       alert("Proszę określić preferowany termin wizyty")
-      return 
+      return
     }
 
     var template_params = {
       chosen_service: chosen_service + " " + chosen_method,
       chosen_date: chosen_date,
       phone_number: phone_number,
-      customer_name: customer_name
+      customer_name: customer_name,
+      ga_clientId: getClientId()
     };
 
     $("#reservation_button").addClass("loading disabled")
 
-    emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
-         console.log('SUCCESS!', response.status, response.text);
+    // emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
+         // console.log('SUCCESS!', response.status, response.text);
         switch_view("#step3", "#step_success")
-      }, function(error) {
-         console.log('FAILED...', error);
-          switch_view("#step3", "#step_failure")
-      });
+      // }, function(error) {
+      //    console.log('FAILED...', error);
+      //     switch_view("#step3", "#step_failure")
+      // });
   }
   </script>
 
@@ -158,12 +224,12 @@
 
             <div id="confirmation-div">
 
-              <h2 class="title-text">
+              <h2 class="title-text" style="font-family: 'Fira Sans'">
                 Rezerwacja terminu wizyty
               </h2>
 
               <span id="step3_txt">
-                Proszę wybrać usługę oraz metodę aby zobaczyć <b>cenę zabiegu</b>. Zabieg przedłużania rzęs trwa około 2.5h. <b>Uwaga</b>: nie uzupełniam rzęs po innych stylistkach, wtedy traktuję zabieg jako nową aplikację.</span>
+                Proszę wybrać usługę oraz metodę aby zobaczyć cenę. Zabieg przedłużania rzęs trwa około 2.5h. <b>Uwaga</b>: jeśli posiadasz jeszcze rzęsy założone u innej stylistki, będę musiała je najpierw zdjąć (+30zł)</span>
               </span>
               <br /><br /><br />
 
@@ -175,7 +241,7 @@
                     Usługa:
                   </div>
                   <div class="ui selection dropdown" id="dropdown_service" style="width: 100%; min-width: 0">
-                    <input type="hidden" name="usluga" id="usluga" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
+                    <input type="hidden" name="usluga" id="usluga" onchange="update_preference()">
                     <i class="dropdown icon"></i>
                     <div class="default text" style="color: #000">Przedłużanie rzęs</div>
                     <div class="menu">
@@ -194,7 +260,7 @@
                       Metoda:
                     </div>
                     <div class="ui selection dropdown" id="dropdown_method" style="width: 100%; min-width: 0">
-                      <input type="hidden" name="metoda" id="metoda" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
+                      <input type="hidden" name="metoda" id="metoda" onchange="update_preference()">
                       <i class="dropdown icon"></i>
                       <div class="default text" style="color: #000">3D</div>
                       <div class="menu">
@@ -210,9 +276,9 @@
                   <script>$('#dropdown_method').dropdown();</script>
 
                 </div>
-                
-              </div>
 
+              </div>
+<!--
               <div id="promo-section">
                 <div class="ui label reservation-input" style="width: 100%;">
                   <i class="calendar icon"></i> Czy wybiera Pani promocyjny termin?
@@ -236,18 +302,67 @@
                 if (Object.keys(promos).length == 0) {
                   $('#promo-section').hide()
                 }
-              </script>
-
-              <div style="width: 100%; margin-bottom: 30px; text-align: right">
-                  Cena wybranego zabiegu:
-                  <div style="float: right; margin-left: 10px">
-                    <div id="price_label">
-                      <a class="ui teal tag label">
-                        <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                        <span id="price">170 zł</span>
-                      </a>
+              </script> -->
+                <div class="ui middle aligned divided list">
+                  <div class="item">
+                    <div class="right floated content">
+                      <div id="price_label">
+                        <a class="ui teal tag label" style="font-size: 0.8em;">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">170 zł</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="inline field content" style="font-size: 0.9em; font-family: Questrial; text-align: right; padding-top: 5px">
+                      Cena wybranego zabiegu:
                     </div>
                   </div>
+                </div>
+
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 100%;">
+                  <i class="calendar icon"></i>
+                  Czy interesują Panią terminy promocyjne? Proszę zaznaczyć które
+                </div>
+                <div class="ui middle aligned divided list">
+                  <div class="item">
+                    <div class="right floated content">
+                      <a class="ui basic teal label" style="font-size: 0.8em">
+                        <span id="price">-10 zł</span>
+                      </a>
+                    </div>
+                    <div class="inline field content">
+                      <div class="ui checkbox" style="font-size: 0.9em">
+                        <input type="checkbox" tabindex="0" class="hidden" id="wczesnie-rano" onchange="update_preference()">
+                        <label>Wcześnie rano<br /><span style="font-size: 0.7em">(start wizyty 7:00 - 8:00)</span></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="right floated content">
+                      <a class="ui basic teal label" style="font-size: 0.8em">
+                        <span id="price">-15 zł</span>
+                      </a>
+                    </div>
+                    <div class="inline field content">
+                      <div class="ui checkbox" style="font-size: 0.9em">
+                        <input type="checkbox" tabindex="0" class="hidden" id="przed-poludniem" onchange="update_preference()">
+                        <label>Przed południem<br /><span style="font-size: 0.7em">(start wizyty 10:15 - 12:15)</span></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <script>$('.ui.checkbox').checkbox();</script>
+              </div>
+
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui label" style="width: 100%;">
+                  <i class="calendar icon"></i>
+                  Proszę opisać dodatkowe preferencje co do terminu:
+                </div>
+                <div class="ui input" style="width: 100%;">
+                  <input type="text" id="termin" value='np. "dowolny najbliższy termin", "czwartek 7:30"' onfocus="if (this.value.substring(0,3) == 'np.') this.value='';" />
+                </div>
               </div>
 
               <div style="width: 100%; margin-bottom: 10px;">
@@ -270,15 +385,6 @@
                 </div>
               </div>
 
-              <div style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label" style="width: 100%; font-size: 11px">
-                  <i class="calendar icon"></i>
-                  Jaki termin Panią interesuje? (8 - 19:00, pon-sob)
-                </div>
-                <div class="ui input" style="width: 100%;">
-                  <input type="text" id="termin" value="Dowolny najbliższy" onfocus="if (this.value == 'Dowolny najbliższy') this.value='';" />
-                </div>
-              </div>
 
                <span id="step3_txt">Imię i nazwisko oraz numer telefonu są przeze mnie wykorzystywane tylko i wyłącznie do kontaktu w celu potwierdzenia rezerwacji oraz zarezerwowania terminu. Po wysłaniu formularza skontaktuję się w celu potwierdzenia wizyty.</span>
 
@@ -293,7 +399,7 @@
 
 
           <div id="step_success">
-            
+
             <div id="success-div">
               <h2 class="title-text">
                 Dziękuję!
@@ -343,16 +449,9 @@
 
   <section style="text-align: center; padding: 20px">
           <div class="ui small images" style="margin-top: 30px">
-            <img src="img/portfolio49.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
-            <img src="img/portfolio46.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
-            <img src="img/portfolio45.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
+            <img src="images/portfolio50.jpg" style="margin: 5px; border: 1px solid #009c95; padding: 2px; background: #fff">
           </div>
   </section>
-
-  <script src="js/jquery.easing.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/wow.js"></script>
-  <script src="js/custom.js"></script>
 
 </body>
 
