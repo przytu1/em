@@ -197,13 +197,13 @@
 
     $("#reservation_button").addClass("loading disabled")
 
-    // emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
-         // console.log('SUCCESS!', response.status, response.text);
+     emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
         switch_view("#step3", "#step_success")
-      // }, function(error) {
-      //    console.log('FAILED...', error);
-      //     switch_view("#step3", "#step_failure")
-      // });
+     }, function(error) {
+        console.log('FAILED...', error);
+        switch_view("#step3", "#step_failure")
+     });
   }
   </script>
 
