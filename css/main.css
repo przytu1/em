@@ -151,7 +151,7 @@ p img {
 	margin: 0;
 }
 p.lead {
-	font-family: 'roboto-light', sans-serif;
+	font-family: Montserrat, sans-serif;
 	font-size: 2.4rem;
 	line-height: 1.8;
 	color: #373737;
@@ -2643,54 +2643,25 @@ footer ul li {
 }
 
 #go-top {
-	position: fixed;
 	bottom: 24px;
-	right: 30px;
 	z-index: 700;
 	display: inherit;
+	margin-top: 10px;
 }
 
-#go-top a {
-	/*text-decoration: none;
-	border: 0 none;
-	display: block;
-	height: 63px;
-	width: 60px;
-	line-height: 63px;
-	text-align: center;
-	background: #b5b5b5;
-	color: #555;
-	text-align: center;
-	text-transform: uppercase;
-	-moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;*/
+#reservation-button {
+	background: #00b5ad;
 	color: #fff;
-	padding: 20px;
-	font-family: sans-serif;
-}
-/*
-#go-top a i {
-	font-size: 24px;
-	line-height: inherit;
+	max-width: 400px;
+	height: 70px;
+	padding-top: 20px;
+	font-size: 1.4em;
+	margin: auto;
 }
 
-#go-top a:visited {
-	background: #b5b5b5;
-	color: #555;
+#reservation-button a {
+	color: #fff;
 }
-
-#go-top a:hover,
-#go-top a:focus {
-	background: #000000;
-	color: #FFFFFF;
-}
-*/
-/* responsive:
- * go top
- * ------------------------------------------------------------------- */
 
 
 /* ===================================================================
