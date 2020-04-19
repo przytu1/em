@@ -43,8 +43,7 @@
     }
     body {
       line-height: 1.4;
-        font-size: 18px;
-        letter-spacing: 0.5px;
+      letter-spacing: 0.5px;
       font-weight: 400;
     }
     .cross {
@@ -104,6 +103,8 @@
 
   var chosen_service = "przedluzanie";
   var chosen_method = "3D";
+  var chosen_morning_date = false;
+  var chosen_noon_date = false;
   var chosen_date = null;
   var checked_price = false;
 
@@ -139,6 +140,8 @@
 
     chosen_method = Object.keys(prices).includes(method) ? method : "3D";
     chosen_service = Object.keys(prices[chosen_method]).includes(service) ? service : "przedluzanie";
+    chosen_morning_date = promo_1;
+    chosen_noon_date = promo_2;
 
     var promo = "";
     if (promo_2) {
@@ -171,6 +174,17 @@
     })
   }
 
+  var selectedPromoHumanReadable = function() {
+    var result = ""
+    if (chosen_morning_date || chosen_noon_date) {
+      if (chosen_morning_date) result += "wcześnie rano (7:00 - 8:00) ";
+      if (chosen_noon_date) result += "przed południem (10:15 - 12:15)";
+    } else {
+      result = "brak (klientka nie wybrała promocyjnych terminów)"
+    }
+    return result;
+  }
+
   var reservation = function(phone_number, customer_name, chosen_date) {
     if (phone_number.length < 9 || Boolean(phone_number.match(/[A-z]/g))) {
       alert("Wpisano niepoprawny numer telefonu. Numer musi składać się z co najmniej 9 cyfr.")
@@ -189,6 +203,7 @@
 
     var template_params = {
       chosen_service: chosen_service + " " + chosen_method,
+      chosen_promo: selectedPromoHumanReadable(),
       chosen_date: chosen_date,
       phone_number: phone_number,
       customer_name: customer_name,
