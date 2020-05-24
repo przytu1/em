@@ -103,8 +103,7 @@
 
   var chosen_service = "przedluzanie";
   var chosen_method = "3D";
-  var chosen_morning_date = false;
-  var chosen_noon_date = false;
+  var chosen_promo = null; // TODO: jesli bedzie mozna wybierac wiele promocji naraz to zamienic na tablice
   var chosen_date = null;
   var checked_price = false;
 
@@ -118,44 +117,28 @@
   }
 
   var promos = {
-    "promo-1": { "date": "wczesnie-rano", "discount-in-pln": 10 },
-    "promo-2": { "date": "przed-poludniem", "discount-in-pln": 15 }
+    "czerwcowy-powrot": { "przedluzanie": 20, "uzupelnianie": 10 }
   }
-
-  // remove outdated promos
-  // for (k in promos) {
-  //     if (new Date() > new Date(promos[k]["date"])) delete promos[k]
-  // }
 
   var update_preference = function() {
     choose_service(
       $('#usluga').val(),
       $('#metoda').val(),
-      $('#wczesnie-rano').is(':checked'),
-      $('#przed-poludniem').is(':checked')
+      $('#czerwcowy-powrot').is(':checked') ? "czerwcowy-powrot" : null
     )
   }
 
-  var choose_service = function(service, method, promo_1 = false, promo_2 = false) {
+  var choose_service = function(service, method, promo = null) {
 
     chosen_method = Object.keys(prices).includes(method) ? method : "3D";
     chosen_service = Object.keys(prices[chosen_method]).includes(service) ? service : "przedluzanie";
-    chosen_morning_date = promo_1;
-    chosen_noon_date = promo_2;
+    chosen_promo = Object.keys(promos).includes(promo) ? promo : null; // TODO: jesli wybrano wiele to zamienic to na iterowanie po tablicy
 
-    var promo = "";
-    if (promo_2) {
-      promo = "promo-2";
-    } else if (promo_1) {
-      promo = "promo-1";
-    }
-
-    const promo_is_selected = Object.keys(promos).includes(promo);
-    const discount = promo_is_selected ? promos[promo]["discount-in-pln"] : 0;
+    const discount = chosen_promo ? promos[chosen_promo][chosen_service] : 0;
     const original_price = prices[chosen_method][chosen_service];
     const final_price = original_price - discount;
 
-    $("#original_price").html(promo_is_selected ? original_price + " zł" : "");
+    $("#original_price").html(chosen_promo ? original_price + " zł" : "");
     $("#price").html(final_price + " zł");
 
     if (!checked_price) {
@@ -172,17 +155,6 @@
       $(toStep).fadeIn("slow");
       $("html, body").animate({ scrollTop: 0 }, "slow");
     })
-  }
-
-  var selectedPromoHumanReadable = function() {
-    var result = ""
-    if (chosen_morning_date || chosen_noon_date) {
-      if (chosen_morning_date) result += "wcześnie rano (7:00 - 8:00) ";
-      if (chosen_noon_date) result += "przed południem (10:15 - 12:15)";
-    } else {
-      result = "brak (klientka nie wybrała promocyjnych terminów)"
-    }
-    return result;
   }
 
   var reservation = function(phone_number, customer_name, chosen_date) {
@@ -203,7 +175,7 @@
 
     var template_params = {
       chosen_service: chosen_service + " " + chosen_method,
-      chosen_promo: selectedPromoHumanReadable(),
+      chosen_promo: chosen_promo,
       chosen_date: chosen_date,
       phone_number: phone_number,
       customer_name: customer_name,
@@ -337,10 +309,24 @@
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label" style="width: 100%;">
                   <i class="calendar icon"></i>
-                  Czy interesują Panią terminy promocyjne? Proszę zaznaczyć które
+                  W prezencie dla Ciebie - szokująco niskie ceny!
+                  <!-- Czy interesują Panią terminy promocyjne? Proszę zaznaczyć które -->
                 </div>
                 <div class="ui middle aligned divided list">
                   <div class="item">
+                    <div class="right floated content">
+                      <a class="ui basic teal label" style="font-size: 0.8em">
+                        <span id="price">-20 zł / -10 zł</span>
+                      </a>
+                    </div>
+                    <div class="inline field content">
+                      <div class="ui checkbox" style="font-size: 0.9em">
+                        <input type="checkbox" tabindex="0" class="hidden" id="czerwcowy-powrot" onchange="update_preference()">
+                        <label style="color: #00b5ad">Czerwcowy powrót do piękna<br /><span style="font-size: 0.7em">(pierwsza wizyta -20zł, uzupełnienie -10zł)</span></label>
+                      </div>
+                    </div>
+                  </div> 
+                 <!--  <div class="item">
                     <div class="right floated content">
                       <a class="ui basic teal label" style="font-size: 0.8em">
                         <span id="price">-10 zł</span>
@@ -365,7 +351,7 @@
                         <label>Przed południem<br /><span style="font-size: 0.7em">(start wizyty 10:15 - 12:15)</span></label>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <script>$('.ui.checkbox').checkbox();</script>
               </div>
@@ -373,7 +359,7 @@
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label" style="width: 100%;">
                   <i class="calendar icon"></i>
-                  Proszę opisać dodatkowe preferencje co do terminu:
+                  Proszę opisać preferencje co do terminu:
                 </div>
                 <div class="ui input" style="width: 100%;">
                   <input type="text" id="termin" value='np. "dowolny najbliższy termin", "czwartek 7:30"' onfocus="if (this.value.substring(0,3) == 'np.') this.value='';" />
@@ -409,6 +395,8 @@
               <i class="hand pointer icon"></i>
               Rezerwuję wizytę
              </button>
+
+             <script type="text/javascript">setTimeout(() => $("#czerwcowy-powrot").click(), 2000)</script>
             </div>
           </div>
 
