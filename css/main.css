@@ -1731,10 +1731,10 @@ header .logo a {
 }
 
 .main-navigation li.current > a {
-	border: 2px solid #151515;
+	border: 1px solid #151515;
 	min-width: 100px;
 	color: #000000;
-	font-family: "montserrat-bold", sans-serif;
+	font-family: "Kanit", sans-serif;
 	text-align: center;
 }
 
@@ -2639,7 +2639,7 @@ footer ul li {
 	left: 0px;
 	width: 100%;
 	z-index: 600;
-	background: #fff;
+	background: #ddd;
 	height: 90px;
 	display: none;
 	border-top: 1px dashed rgb(85, 85, 85)
@@ -2650,15 +2650,16 @@ footer ul li {
 	z-index: 700;
 	display: inherit;
 	margin-top: 10px;
+	padding: 0 10px;
 }
 
 #reservation-button {
-	background: #00b5ad;
+	background: #4267B2;
 	color: #fff;
 	max-width: 400px;
 	height: 70px;
-	padding-top: 10px;
-	font-size: 1.4em;
+	padding-top: 20px;
+	font-size: 1.2em;
 	margin: auto;
 }
 
