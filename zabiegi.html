@@ -77,6 +77,15 @@
   </script>
   <!-- End Google Analytics -->
 
+  <!-- Global site tag (gtag.js) - Google Ads: 804279209 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-804279209"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-804279209');
+  </script>
+
   <!-- Hotjar Tracking Code for lashdream.pl -->
   <script>
       (function(h,o,t,j,a,r){
@@ -101,12 +110,6 @@
     }
   }
 
-  var chosen_service = "przedluzanie";
-  var chosen_method = "3D";
-  var chosen_promo = null; // TODO: jesli bedzie mozna wybierac wiele promocji naraz to zamienic na tablice
-  var chosen_date = null;
-  var checked_price = false;
-
   var prices = {
     "2D": { "przedluzanie": 150, "uzupelnianie": 120 },
     "3D": { "przedluzanie": 170, "uzupelnianie": 140 },
@@ -114,18 +117,53 @@
     "5D": { "przedluzanie": 190, "uzupelnianie": 160 },
     "6D": { "przedluzanie": 200, "uzupelnianie": 170 },
     "7D": { "przedluzanie": 210, "uzupelnianie": 180 },
+    "henna": { "lifting i laminacja rzęs": 130 },
+    "henna+botoks": { "lifting i laminacja rzęs": 140 }
   }
 
   var promos = {
-    "czerwcowy-powrot": { "przedluzanie": 20, "uzupelnianie": 10 }
+    // "czerwcowy-powrot": { "przedluzanie": 20, "uzupelnianie": 10 }
+    "promo-lifting-henna": { "lifting i laminacja rzęs": 50 },
+    "promo-lifting-botoks": { "lifting i laminacja rzęs": 40 }
   }
 
+  var chosen_service = "przedluzanie";
+  var chosen_method = "3D";
+  var chosen_promo = null; // TODO: jesli bedzie mozna wybierac wiele promocji naraz to zamienic na tablice
+  var chosen_price = prices['3D']['przedluzanie'];
+  var chosen_date = null;
+  var checked_price = false;
+
+
   var update_preference = function() {
-    choose_service(
-      $('#usluga').val(),
-      $('#metoda').val(),
-      $('#czerwcowy-powrot').is(':checked') ? "czerwcowy-powrot" : null
-    )
+
+    if ($('#usluga').val() == "lifting+laminacja+henna") {
+
+      $('#method_div').hide()
+      choose_service("lifting i laminacja rzęs", "henna")
+
+    } else if ($('#usluga').val() == "lifting+laminacja+henna (promo pon-sro)") {
+
+      $('#method_div').hide()
+      choose_service("lifting i laminacja rzęs", "henna", "promo-lifting-henna")
+
+    } else if ($('#usluga').val() == "lifting+laminacja+henna+botoks") {
+
+      $('#method_div').hide()
+      choose_service("lifting i laminacja rzęs", "henna+botoks")
+
+    } else if ($('#usluga').val() == "lifting+laminacja+henna+botoks (promo pon-sro)") {
+
+      $('#method_div').hide()
+      choose_service("lifting i laminacja rzęs", "henna+botoks", "promo-lifting-botoks")
+
+    } else {
+
+      $('#method_div').show()
+      choose_service($('#usluga').val(), $('#metoda').val())
+
+    }
+    //$('#czerwcowy-powrot').is(':checked') ? "czerwcowy-powrot" : null
   }
 
   var choose_service = function(service, method, promo = null) {
@@ -137,6 +175,8 @@
     const discount = chosen_promo ? promos[chosen_promo][chosen_service] : 0;
     const original_price = prices[chosen_method][chosen_service];
     const final_price = original_price - discount;
+
+    chosen_price = final_price;
 
     $("#original_price").html(chosen_promo ? original_price + " zł" : "");
     $("#price").html(final_price + " zł");
@@ -174,9 +214,10 @@
     }
 
     var template_params = {
-      chosen_service: chosen_service + " " + chosen_method,
+      chosen_service: chosen_service + " (" + chosen_method + ")",
       chosen_promo: chosen_promo,
       chosen_date: chosen_date,
+      chosen_price: chosen_price,
       phone_number: phone_number,
       customer_name: customer_name,
       ga_clientId: getClientId()
@@ -184,13 +225,15 @@
 
     $("#reservation_button").addClass("loading disabled")
 
-     emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        switch_view("#step3", "#step_success")
-     }, function(error) {
-        console.log('FAILED...', error);
-        switch_view("#step3", "#step_failure")
-     });
+    gtag('event', 'conversion', { 'send_to': 'AW-804279209/9Tn2CMzasNUBEKmnwf8C' });
+
+    emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+      switch_view("#step3", "#step_success")
+    }, function(error) {
+      console.log('FAILED...', error);
+      switch_view("#step3", "#step_failure")
+    });
   }
   </script>
 
@@ -217,6 +260,8 @@
 
               <span id="step3_txt">
                 Proszę wybrać usługę oraz metodę aby zobaczyć cenę. Zabieg przedłużania rzęs trwa około 2.5h. <b>Uwaga</b>: jeśli posiadasz jeszcze rzęsy założone u innej stylistki, będę musiała je najpierw zdjąć (+30zł)</span>
+                <br /><br />
+                <span style="color: #f00"><b>Promocja:</b> w poniedziałki, wtorki i środy lifting i laminacja rzęs w cenie 80zł (henna) lub 100zł (henna + botoks)</span>
               </span>
               <br /><br /><br />
 
@@ -234,12 +279,16 @@
                     <div class="menu">
                       <div class="item" data-value="przedluzanie">Przedłużanie rzęs</div>
                       <div class="item" data-value="uzupelnianie">Uzupełnianie rzęs</div>
+                      <div class="item" data-value="lifting+laminacja+henna">Lifting i laminacja rzęs + henna</div> 
+                      <div class="item" data-value="lifting+laminacja+henna (promo pon-sro)">Lifting i laminacja rzęs + henna (promocja pon - śro)</div> 
+                      <div class="item" data-value="lifting+laminacja+henna+botoks">Lifting i laminacja rzęs + henna + botoks</div> 
+                      <div class="item" data-value="lifting+laminacja+henna+botoks (promo pon-sro)">Lifting i laminacja rzęs + henna + botoks (promocja pon - śro)</div> 
                     </div>
                   </div>
                   <script>$('#dropdown_service').dropdown();</script>
 
                 </div>
-                <div style="width: 38%; float: right">
+                <div style="width: 38%; float: right" id="method_div">
 
                   <div style="width: 100%; margin-bottom: 10px;">
                     <div class="ui label reservation-input" style="width: 100%;">
@@ -265,32 +314,8 @@
                 </div>
 
               </div>
-<!--
-              <div id="promo-section">
-                <div class="ui label reservation-input" style="width: 100%;">
-                  <i class="calendar icon"></i> Czy wybiera Pani promocyjny termin?
-                </div>
-                <div class="ui selection dropdown" id="dropdown_promo" style="width: 100%; min-width: 0; margin-bottom: 10px;">
-                  <input type="hidden" name="promo" id="promo" onchange="choose_service($('#usluga').val(), $('#metoda').val(), $('#promo').val())">
-                  <i class="dropdown icon"></i>
-                  <div class="default text" style="color: #000">Nie, chcę wybrać własny termin</div>
-                  <div class="menu" id="promo-options">
-                    <div class="item" data-value="no-promo">Nie, chcę wybrać własny termin</div>
-                    <script>
-                      Object.keys(promos).forEach(promo_key => {
-                        $("#promo-options").append('<div class="item" data-value="' + promo_key + '">Promocja: ' + promos[promo_key]["date"] + ' <span style="color: #00b5ad; font-weight: bold;">-' + promos[promo_key]["discount-in-pln"] + 'zł</span></div>');
-                      });
-                    </script>
-                  </div>
-                </div>
-              </div>
-              <script>
-                $('#dropdown_promo').dropdown();
-                if (Object.keys(promos).length == 0) {
-                  $('#promo-section').hide()
-                }
-              </script> -->
-                <div class="ui middle aligned divided list">
+
+                <div class="ui middle aligned divided list" style="margin-bottom: 20px">
                   <div class="item">
                     <div class="right floated content">
                       <div id="price_label">
@@ -305,56 +330,6 @@
                     </div>
                   </div>
                 </div>
-
-              <div style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label" style="width: 100%;">
-                  <i class="calendar icon"></i>
-                  W prezencie dla Ciebie - szokująco niskie ceny!
-                  <!-- Czy interesują Panią terminy promocyjne? Proszę zaznaczyć które -->
-                </div>
-                <div class="ui middle aligned divided list">
-                  <div class="item">
-                    <div class="right floated content">
-                      <a class="ui basic teal label" style="font-size: 0.8em">
-                        <span id="price">-20 zł / -10 zł</span>
-                      </a>
-                    </div>
-                    <div class="inline field content">
-                      <div class="ui checkbox" style="font-size: 0.9em">
-                        <input type="checkbox" tabindex="0" class="hidden" id="czerwcowy-powrot" onchange="update_preference()">
-                        <label style="color: #00b5ad">Czerwcowy powrót do piękna<br /><span style="font-size: 0.7em">(pierwsza wizyta -20zł, uzupełnienie -10zł)</span></label>
-                      </div>
-                    </div>
-                  </div> 
-                 <!--  <div class="item">
-                    <div class="right floated content">
-                      <a class="ui basic teal label" style="font-size: 0.8em">
-                        <span id="price">-10 zł</span>
-                      </a>
-                    </div>
-                    <div class="inline field content">
-                      <div class="ui checkbox" style="font-size: 0.9em">
-                        <input type="checkbox" tabindex="0" class="hidden" id="wczesnie-rano" onchange="update_preference()">
-                        <label>Wcześnie rano<br /><span style="font-size: 0.7em">(start wizyty 7:00 - 8:00)</span></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="right floated content">
-                      <a class="ui basic teal label" style="font-size: 0.8em">
-                        <span id="price">-15 zł</span>
-                      </a>
-                    </div>
-                    <div class="inline field content">
-                      <div class="ui checkbox" style="font-size: 0.9em">
-                        <input type="checkbox" tabindex="0" class="hidden" id="przed-poludniem" onchange="update_preference()">
-                        <label>Przed południem<br /><span style="font-size: 0.7em">(start wizyty 10:15 - 12:15)</span></label>
-                      </div>
-                    </div>
-                  </div> -->
-                </div>
-                <script>$('.ui.checkbox').checkbox();</script>
-              </div>
 
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui label" style="width: 100%;">
@@ -396,7 +371,6 @@
               Rezerwuję wizytę
              </button>
 
-             <script type="text/javascript">setTimeout(() => $("#czerwcowy-powrot").click(), 2000)</script>
             </div>
           </div>
 
