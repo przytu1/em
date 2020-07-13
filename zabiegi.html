@@ -63,6 +63,15 @@
     .ui.selection.dropdown .menu {
       max-height: 17rem;
     }
+    .service-item {
+      float: left;
+      width: 65%;
+      font-weight: normal;
+      font-size: 0.9em;
+    }
+    .item {
+      border-bottom: 1px dotted #aaa;
+    }
   </style>
 
   <!-- Google Analytics -->
@@ -77,13 +86,13 @@
   </script>
   <!-- End Google Analytics -->
 
-  <!-- Global site tag (gtag.js) - Google Ads: 804279209 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-804279209"></script>
+  <!-- Global site tag (gtag.js) - Google Ads: 621176711 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-621176711"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-804279209');
+    gtag('config', 'AW-621176711');
   </script>
 
   <!-- Hotjar Tracking Code for lashdream.pl -->
@@ -111,84 +120,40 @@
   }
 
   var prices = {
-    "2D": { "przedluzanie": 150, "uzupelnianie": 120 },
-    "3D": { "przedluzanie": 170, "uzupelnianie": 140 },
-    "4D": { "przedluzanie": 180, "uzupelnianie": 150 },
-    "5D": { "przedluzanie": 190, "uzupelnianie": 160 },
-    "6D": { "przedluzanie": 200, "uzupelnianie": 170 },
-    "7D": { "przedluzanie": 210, "uzupelnianie": 180 },
-    "henna": { "lifting i laminacja rzęs": 130 },
-    "henna+botoks": { "lifting i laminacja rzęs": 150 }
+    "przedluzanie-2d": 150,
+    "przedluzanie-34d": 170,
+    "przedluzanie-56d": 190,
+    "uzupelnianie-2d": 120,
+    "uzupelnianie-34d": 140,
+    "uzupelnianie-56d": 160,
+    "zdejmowanie": 30,
+    "lifting-botoks": 150,
+    "lifting-botoks-promo": 100,
+    "lifting-henna": 130,
+    "lifting-henna-promo": 80,
+    "brwi-henna-pudrowa": 60,
+    "brwi-henna-farbka": 30
   }
 
-  var promos = {
-    // "czerwcowy-powrot": { "przedluzanie": 20, "uzupelnianie": 10 }
-    "promo-lifting-henna": { "lifting i laminacja rzęs": 50 },
-    "promo-lifting-botoks": { "lifting i laminacja rzęs": 50 }
+  var human_readable_services = {
+    "przedluzanie-2d": "Przedłużanie rzęs 2D",
+    "przedluzanie-34d": "Przedłużanie rzęs 3-4D",
+    "przedluzanie-56d": "Przedłużanie rzęs 5-6D",
+    "uzupelnianie-2d": "Uzupełnianie rzęs 2D",
+    "uzupelnianie-34d": "Uzupełnianie rzęs 3-4D",
+    "uzupelnianie-56d": "Uzupełnianie rzęs 5-6D",
+    "zdejmowanie": "Zdejmowanie rzęs",
+    "lifting-botoks": "Lifting i laminacja rzęs z henną i botoksem",
+    "lifting-botoks-promo": "Lifting i laminacja rzęs z henną i botoksem (promo pon-śro)",
+    "lifting-henna": "Lifting i laminacja rzęs z henną",
+    "lifting-henna-promo": "Lifting i laminacja rzęs z henną (promo pon-śro)",
+    "brwi-henna-pudrowa": "Henna pudrowa z geometrią brwi i regulacją woskiem",
+    "brwi-henna-farbka": "Henna brwi (farbka)"
   }
 
-  var chosen_service = "przedluzanie";
-  var chosen_method = "3D";
-  var chosen_promo = null; // TODO: jesli bedzie mozna wybierac wiele promocji naraz to zamienic na tablice
-  var chosen_price = prices['3D']['przedluzanie'];
+  var chosen_service = null;
   var chosen_date = null;
   var checked_price = false;
-
-
-  var update_preference = function() {
-
-    if ($('#usluga').val() == "lifting+laminacja+henna") {
-
-      $('#method_div').hide()
-      choose_service("lifting i laminacja rzęs", "henna")
-
-    } else if ($('#usluga').val() == "lifting+laminacja+henna (promo pon-sro)") {
-
-      $('#method_div').hide()
-      choose_service("lifting i laminacja rzęs", "henna", "promo-lifting-henna")
-
-    } else if ($('#usluga').val() == "lifting+laminacja+henna+botoks") {
-
-      $('#method_div').hide()
-      choose_service("lifting i laminacja rzęs", "henna+botoks")
-
-    } else if ($('#usluga').val() == "lifting+laminacja+henna+botoks (promo pon-sro)") {
-
-      $('#method_div').hide()
-      choose_service("lifting i laminacja rzęs", "henna+botoks", "promo-lifting-botoks")
-
-    } else {
-
-      $('#method_div').show()
-      choose_service($('#usluga').val(), $('#metoda').val())
-
-    }
-    //$('#czerwcowy-powrot').is(':checked') ? "czerwcowy-powrot" : null
-  }
-
-  var choose_service = function(service, method, promo = null) {
-
-    chosen_method = Object.keys(prices).includes(method) ? method : "3D";
-    chosen_service = Object.keys(prices[chosen_method]).includes(service) ? service : "przedluzanie";
-    chosen_promo = Object.keys(promos).includes(promo) ? promo : null; // TODO: jesli wybrano wiele to zamienic to na iterowanie po tablicy
-
-    const discount = chosen_promo ? promos[chosen_promo][chosen_service] : 0;
-    const original_price = prices[chosen_method][chosen_service];
-    const final_price = original_price - discount;
-
-    chosen_price = final_price;
-
-    $("#original_price").html(chosen_promo ? original_price + " zł" : "");
-    $("#price").html(final_price + " zł");
-
-    if (!checked_price) {
-      ga('send', 'event', 'Checked price', 'click', 'button');
-      checked_price = true;
-    }
-    setTimeout(() => {
-      $('#price_label').transition('tada');
-    }, 500);
-  }
 
   var switch_view = function(fromStep, toStep) {
     $(fromStep).fadeOut("slow", function() {
@@ -214,10 +179,9 @@
     }
 
     var template_params = {
-      chosen_service: chosen_service + " (" + chosen_method + ")",
-      chosen_promo: chosen_promo,
+      chosen_service: human_readable_services[document.form_service.usluga.value],
+      chosen_price: prices[document.form_service.usluga.value],
       chosen_date: chosen_date,
-      chosen_price: chosen_price,
       phone_number: phone_number,
       customer_name: customer_name,
       ga_clientId: getClientId()
@@ -225,7 +189,7 @@
 
     $("#reservation_button").addClass("loading disabled")
 
-    gtag('event', 'conversion', { 'send_to': 'AW-804279209/9Tn2CMzasNUBEKmnwf8C' });
+    gtag('event', 'conversion', {'send_to': 'AW-621176711/H7ipCNz89NUBEIfPmagC'});
 
     emailjs.send('mailgun', 'umowienie_wizyty', template_params).then(function(response) {
       console.log('SUCCESS!', response.status, response.text);
@@ -259,17 +223,184 @@
               </h2>
 
               <span id="step3_txt">
-                Proszę wybrać usługę oraz metodę aby zobaczyć cenę. Zabieg przedłużania rzęs trwa około 2.5h. <b>Uwaga</b>: jeśli posiadasz jeszcze rzęsy założone u innej stylistki, będę musiała je najpierw zdjąć (+30zł)</span>
+                Proszę wybrać usługę oraz metodę aby zobaczyć cenę. Zabieg przedłużania rzęs trwa około 2.5h, liftingu około 1h. <b>Uwaga</b>: jeśli posiadasz jeszcze rzęsy założone u innej stylistki, będę musiała je najpierw zdjąć (+30zł)</span>
                 <br /><br />
-                <span style="color: #f00">
-                  <b>Promocja w poniedziałki, wtorki i środy:</b><br />
-                  lifting i laminacja rzęs z henną w cenie 80zł<br />
-                  lifting i laminacja rzęs z henną i botoksem w cenie 100zł
+                <span style="color: #f00; font-size: 0.9em">
+                  <b>Do końca lipca<br /> promocja w poniedziałki, wtorki i środy:</b><br />
+                  lifting i laminacja rzęs z henną za 80zł<br />
+                  lifting i laminacja rzęs z henną i botoksem za 100zł
                 </span>
               </span>
               <br /><br /><br />
 
-              <div style="width: 100%; margin-bottom: 10px; min-height: 70px" id="form-top">
+
+              <form name="form_service">
+
+              <div style="width: 100%; margin-bottom: 10px;">
+                <div class="ui teal label" style="width: 100%; color: #fff">
+                  <i class="calendar icon"></i>
+                  Proszę wybrać usługę:   
+                </div>
+                <div style="width: 100%; border: 1px solid #e8e8e8">
+
+                  <div class="ui middle aligned selection list">
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="przedluzanie-2d" id="radio1" checked="checked"></div>
+                      <div class="content header" onclick="$('#radio1').prop('checked', true)">
+                        <div class="service-item">Przedłużanie rzęs metodą 2D</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">150 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="przedluzanie-34d" id="radio2"></div>
+                      <div class="content header" onclick="$('#radio2').prop('checked', true)">
+                        <div class="service-item">Przedłużanie rzęs metodą 3-4D</div>
+                          <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                            <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                            <span id="price">170 zł</span>
+                          </span>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="przedluzanie-56d" id="radio3"></div>
+                      <div class="content header" onclick="$('#radio3').prop('checked', true)">
+                        <div class="service-item">Przedłużanie rzęs metodą 5-6D</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">190 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="uzupelnianie-2d" id="radio4"></div>
+                      <div class="content header" onclick="$('#radio4').prop('checked', true)">
+                        <div class="service-item">Uzupełnianie rzęs metodą 2D</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">120 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="uzupelnianie-34d" id="radio5"></div>
+                      <div class="content header" onclick="$('#radio5').prop('checked', true)">
+                        <div class="service-item">Uzupełnianie rzęs metodą 3-4D</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">140 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="uzupelnianie-56d" id="radio6"></div>
+                      <div class="content header" onclick="$('#radio6').prop('checked', true)">
+                        <div class="service-item">Uzupełnianie rzęs metodą 5-6D</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">160 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="zdejmowanie" id="radio7"></div>
+                      <div class="content header" onclick="$('#radio7').prop('checked', true)">
+                        <div class="service-item">Zdejmowanie rzęs</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">30 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-botoks" id="radio8"></div>
+                      <div class="content header" onclick="$('#radio8').prop('checked', true)">
+                        <div class="service-item">Lifting i laminacja rzęs z henną i botoksem</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">150 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-botoks-promo" id="radio9"></div>
+                      <div class="content header" onclick="$('#radio9').prop('checked', true)">
+                        <div class="service-item">Lifting i laminacja rzęs z henną i botoksem - <span style="color: #f00">promocja pon-śro</span></div>
+                        <span class="ui red tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">100 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-henna" id="radio10"></div>
+                      <div class="content header" onclick="$('#radio10').prop('checked', true)">
+                        <div class="service-item">Lifting i laminacja rzęs z henną</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">130 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-henna-promo" id="radio11"></div>
+                      <div class="content header" onclick="$('#radio11').prop('checked', true)">
+                        <div class="service-item">Lifting i laminacja rzęs z henną - <span style="color: #f00">promocja pon-śro</span></div>
+                        <span class="ui red tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">80 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="brwi-henna-pudrowa" id="radio12"></div>
+                      <div class="content header" onclick="$('#radio12').prop('checked', true)">
+                        <div class="service-item">Henna pudrowa z geometrią brwi i regulacją woskiem</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">60 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="brwi-henna-farbka" id="radio13"></div>
+                      <div class="content header" onclick="$('#radio13').prop('checked', true)">
+                        <div class="service-item">Henna brwi (farbka)</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">30 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              </form>
+
+<!-- 
                 <div style="width: 60%; float: left">
 
                   <div class="ui label reservation-input" style="width: 100%;">
@@ -277,7 +408,7 @@
                     Usługa:
                   </div>
                   <div class="ui selection dropdown" id="dropdown_service" style="width: 100%; min-width: 0">
-                    <input type="hidden" name="usluga" id="usluga" onchange="update_preference()">
+                    <input type="hidden" name="usluga" id="usluga">
                     <i class="dropdown icon"></i>
                     <div class="default text" style="color: #000">Przedłużanie rzęs</div>
                     <div class="menu">
@@ -317,8 +448,8 @@
 
                 </div>
 
-              </div>
-
+              </div> -->
+<!-- 
                 <div class="ui middle aligned divided list" style="margin-bottom: 20px">
                   <div class="item">
                     <div class="right floated content">
@@ -334,9 +465,9 @@
                     </div>
                   </div>
                 </div>
-
+ -->
               <div style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label" style="width: 100%;">
+                <div class="ui teal label" style="width: 100%; color: #fff;">
                   <i class="calendar icon"></i>
                   Proszę opisać preferencje co do terminu:
                 </div>
@@ -346,7 +477,7 @@
               </div>
 
               <div style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label reservation-input" style="width: 100%;">
+                <div class="ui teal label reservation-input" style="width: 100%; color: #fff;">
                   <i class="phone icon"></i>
                   Numer telefonu do potwierdzenia rezerwacji:
                 </div>
@@ -356,7 +487,7 @@
               </div>
 
               <div style="width: 100%; margin-bottom: 10px;">
-                <div class="ui label reservation-input" style="width: 100%;">
+                <div class="ui teal label reservation-input" style="width: 100%; color: #fff;">
                   <i class="user icon"></i>
                   Imię i nazwisko:
                 </div>
