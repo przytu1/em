@@ -128,11 +128,7 @@
     "uzupelnianie-56d": 160,
     "zdejmowanie": 30,
     "lifting-botoks": 150,
-    "lifting-botoks-promo": 100,
-    "lifting-henna": 130,
-    "lifting-henna-promo": 80,
-    "brwi-henna-pudrowa": 60,
-    "brwi-henna-farbka": 30
+    "brwi-henna-pudrowa": 60
   }
 
   var human_readable_services = {
@@ -143,12 +139,8 @@
     "uzupelnianie-34d": "Uzupełnianie rzęs 3-4D",
     "uzupelnianie-56d": "Uzupełnianie rzęs 5-6D",
     "zdejmowanie": "Zdejmowanie rzęs",
-    "lifting-botoks": "Lifting i laminacja rzęs z henną i botoksem",
-    "lifting-botoks-promo": "Lifting i laminacja rzęs z henną i botoksem (promo pon-śro)",
-    "lifting-henna": "Lifting i laminacja rzęs z henną",
-    "lifting-henna-promo": "Lifting i laminacja rzęs z henną (promo pon-śro)",
-    "brwi-henna-pudrowa": "Henna pudrowa z geometrią brwi i regulacją woskiem",
-    "brwi-henna-farbka": "Henna brwi (farbka)"
+    "lifting-botoks": "Lifting i laminacja rzęs z farbką i botoksem",
+    "brwi-henna-pudrowa": "Henna pudrowa z geometrią brwi i regulacją woskiem"
   }
 
   var chosen_service = null;
@@ -224,12 +216,6 @@
 
               <span id="step3_txt">
                 Proszę wybrać usługę oraz metodę aby zobaczyć cenę. Zabieg przedłużania rzęs trwa około 2.5h, liftingu około 1h. <b>Uwaga</b>: jeśli posiadasz jeszcze rzęsy założone u innej stylistki, będę musiała je najpierw zdjąć (+30zł)</span>
-                <br /><br />
-                <span style="color: #f00; font-size: 0.9em">
-                  <b>Do końca lipca<br /> promocja w poniedziałki, wtorki i środy:</b><br />
-                  lifting i laminacja rzęs z henną za 80zł<br />
-                  lifting i laminacja rzęs z henną i botoksem za 100zł
-                </span>
               </span>
               <br /><br /><br />
 
@@ -239,11 +225,23 @@
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui teal label" style="width: 100%; color: #fff">
                   <i class="calendar icon"></i>
-                  Proszę wybrać usługę:   
+                  Proszę wybrać usługę:
                 </div>
                 <div style="width: 100%; border: 1px solid #e8e8e8">
-
                   <div class="ui middle aligned selection list">
+
+                    <div class="item">
+                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-botoks" id="radio8"></div>
+                      <div class="content header" onclick="$('#radio8').prop('checked', true)">
+                        <div class="service-item">Lifting i laminacja rzęs z botoksem i farbką</div>
+                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
+                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
+                          <span id="price">150 zł</span>
+                        </span>
+                      </div>
+                    </div>
+
+
                     <div class="item">
                       <div class="ui avatar image"><input type="radio" name="usluga" value="przedluzanie-2d" id="radio1" checked="checked"></div>
                       <div class="content header" onclick="$('#radio1').prop('checked', true)">
@@ -324,54 +322,6 @@
 
 
                     <div class="item">
-                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-botoks" id="radio8"></div>
-                      <div class="content header" onclick="$('#radio8').prop('checked', true)">
-                        <div class="service-item">Lifting i laminacja rzęs z henną i botoksem</div>
-                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
-                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                          <span id="price">150 zł</span>
-                        </span>
-                      </div>
-                    </div>
-
-
-                    <div class="item">
-                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-botoks-promo" id="radio9"></div>
-                      <div class="content header" onclick="$('#radio9').prop('checked', true)">
-                        <div class="service-item">Lifting i laminacja rzęs z henną i botoksem - <span style="color: #f00">promocja pon-śro</span></div>
-                        <span class="ui red tag label" style="font-size: 0.8em; float: right">
-                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                          <span id="price">100 zł</span>
-                        </span>
-                      </div>
-                    </div>
-
-
-                    <div class="item">
-                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-henna" id="radio10"></div>
-                      <div class="content header" onclick="$('#radio10').prop('checked', true)">
-                        <div class="service-item">Lifting i laminacja rzęs z henną</div>
-                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
-                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                          <span id="price">130 zł</span>
-                        </span>
-                      </div>
-                    </div>
-
-
-                    <div class="item">
-                      <div class="ui avatar image"><input type="radio" name="usluga" value="lifting-henna-promo" id="radio11"></div>
-                      <div class="content header" onclick="$('#radio11').prop('checked', true)">
-                        <div class="service-item">Lifting i laminacja rzęs z henną - <span style="color: #f00">promocja pon-śro</span></div>
-                        <span class="ui red tag label" style="font-size: 0.8em; float: right">
-                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                          <span id="price">80 zł</span>
-                        </span>
-                      </div>
-                    </div>
-
-
-                    <div class="item">
                       <div class="ui avatar image"><input type="radio" name="usluga" value="brwi-henna-pudrowa" id="radio12"></div>
                       <div class="content header" onclick="$('#radio12').prop('checked', true)">
                         <div class="service-item">Henna pudrowa z geometrią brwi i regulacją woskiem</div>
@@ -383,89 +333,11 @@
                     </div>
 
 
-                    <div class="item">
-                      <div class="ui avatar image"><input type="radio" name="usluga" value="brwi-henna-farbka" id="radio13"></div>
-                      <div class="content header" onclick="$('#radio13').prop('checked', true)">
-                        <div class="service-item">Henna brwi (farbka)</div>
-                        <span class="ui teal tag label" style="font-size: 0.8em; float: right">
-                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                          <span id="price">30 zł</span>
-                        </span>
-                      </div>
-                    </div>
-
-
                   </div>
                 </div>
               </div>
               </form>
 
-<!-- 
-                <div style="width: 60%; float: left">
-
-                  <div class="ui label reservation-input" style="width: 100%;">
-                    <i class="tag icon"></i>
-                    Usługa:
-                  </div>
-                  <div class="ui selection dropdown" id="dropdown_service" style="width: 100%; min-width: 0">
-                    <input type="hidden" name="usluga" id="usluga">
-                    <i class="dropdown icon"></i>
-                    <div class="default text" style="color: #000">Przedłużanie rzęs</div>
-                    <div class="menu">
-                      <div class="item" data-value="przedluzanie">Przedłużanie rzęs</div>
-                      <div class="item" data-value="uzupelnianie">Uzupełnianie rzęs</div>
-                      <div class="item" data-value="lifting+laminacja+henna">Lifting i laminacja rzęs + henna</div> 
-                      <div class="item" data-value="lifting+laminacja+henna (promo pon-sro)">Lifting i laminacja rzęs + henna (promocja pon - śro)</div> 
-                      <div class="item" data-value="lifting+laminacja+henna+botoks">Lifting i laminacja rzęs + henna + botoks</div> 
-                      <div class="item" data-value="lifting+laminacja+henna+botoks (promo pon-sro)">Lifting i laminacja rzęs + henna + botoks (promocja pon - śro)</div> 
-                    </div>
-                  </div>
-                  <script>$('#dropdown_service').dropdown();</script>
-
-                </div>
-                <div style="width: 38%; float: right" id="method_div">
-
-                  <div style="width: 100%; margin-bottom: 10px;">
-                    <div class="ui label reservation-input" style="width: 100%;">
-                      <i class="tag icon"></i>
-                      Metoda:
-                    </div>
-                    <div class="ui selection dropdown" id="dropdown_method" style="width: 100%; min-width: 0">
-                      <input type="hidden" name="metoda" id="metoda" onchange="update_preference()">
-                      <i class="dropdown icon"></i>
-                      <div class="default text" style="color: #000">3D</div>
-                      <div class="menu">
-                        <div class="item" data-value="2D">2D</div>
-                        <div class="item" data-value="3D">3D</div>
-                        <div class="item" data-value="4D">4D</div>
-                        <div class="item" data-value="5D">5D</div>
-                        <div class="item" data-value="6D">6D</div>
-                        <div class="item" data-value="7D">7D</div>
-                      </div>
-                    </div>
-                  </div>
-                  <script>$('#dropdown_method').dropdown();</script>
-
-                </div>
-
-              </div> -->
-<!-- 
-                <div class="ui middle aligned divided list" style="margin-bottom: 20px">
-                  <div class="item">
-                    <div class="right floated content">
-                      <div id="price_label">
-                        <a class="ui teal tag label" style="font-size: 0.8em;">
-                          <span id="original_price" class="cross" style="text-decoration: line-through"></span>
-                          <span id="price">170 zł</span>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="inline field content" style="font-size: 0.9em; font-family: Questrial; text-align: right; padding-top: 5px">
-                      Cena wybranego zabiegu:
-                    </div>
-                  </div>
-                </div>
- -->
               <div style="width: 100%; margin-bottom: 10px;">
                 <div class="ui teal label" style="width: 100%; color: #fff;">
                   <i class="calendar icon"></i>
